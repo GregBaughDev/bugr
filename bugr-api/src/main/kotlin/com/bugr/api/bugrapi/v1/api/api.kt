@@ -3,6 +3,7 @@ package com.bugr.api.bugrapi.v1.api;
 import com.bugr.api.bugrapi.models.Login
 import com.bugr.api.bugrapi.models.Review
 import com.bugr.api.bugrapi.models.User
+import com.bugr.api.bugrapi.models.UserType
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController
@@ -23,7 +24,7 @@ public class api {
                 "TestPass",
                 "test@user.com",
                 "Melbourne",
-                "Giver",
+                UserType.OFFERING,
                 "Fridge and feed every 3 days",
                 true
             ))
@@ -68,7 +69,7 @@ public class api {
                 "TestPass",
                 "test@user.com",
                 "Melbourne",
-                "Giver",
+                UserType.OFFERING,
                 "Fridge and feed every 3 days",
                 true
             ), reviews
