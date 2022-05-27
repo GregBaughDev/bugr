@@ -27,6 +27,7 @@ class Users (
     var location: String,
     @Column(name = "STATE")
     var state: String,
+    @Enumerated(EnumType.STRING)
     @Column(name = "USER_TYPE")
     var userType: UserType,
     @Column(name = "ABOUT_BUG")
