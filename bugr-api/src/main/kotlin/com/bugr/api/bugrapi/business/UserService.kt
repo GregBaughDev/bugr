@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserService(private val userRepository: UserRepository) {
+class UserService(val userRepository: UserRepository) {
 
     fun getUser(id: Int): Optional<Users> {
-        return userRepository.findById(id)
+        return userRepository.findUserById(id)
     }
+
 }

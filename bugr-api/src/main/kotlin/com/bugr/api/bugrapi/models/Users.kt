@@ -19,10 +19,10 @@ class Users (
     var userId: Int,
     @Column(name = "USERNAME")
     var userName: String,
-    @Column(name = "USER_PASSWORD")
-    var userPassword: String,
-    @Column(name = "EMAIL")
-    var email: String,
+//    @Column(name = "USER_PASSWORD")
+//    var userPassword: String,
+//    @Column(name = "EMAIL")
+//    var email: String,
     @Column(name = "LOCATION")
     var location: String,
     @Column(name = "STATE")
