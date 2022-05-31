@@ -10,9 +10,9 @@ import java.util.Optional
 interface MessageRepository : JpaRepository<Messages, Int> {
 
     @Query(
-        value = "SELECT * FROM messages WHERE chat_id = :chatId",
+        value = "SELECT * FROM messages WHERE chat_id = :chatId ORDER BY message_date DESC",
         nativeQuery = true
     )
-    fun getAllChatMessages(chatId: Int): Optional<Messages>
+    fun getAllChatMessages(chatId: Int): Optional<List<Messages>>
 
 }

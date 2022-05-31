@@ -8,9 +8,8 @@ import java.util.*
 @Service
 class MessageService(val messageRepository: MessageRepository) {
 
-    fun getMessages(chatId: Int): Optional<Messages> {
+    fun getMessages(chatId: Int): Optional<List<Messages>> {
         return messageRepository.getAllChatMessages(chatId)
-        // TO DO -> Sort messages by date order - Think it should be done in the DB?
     }
 
 }

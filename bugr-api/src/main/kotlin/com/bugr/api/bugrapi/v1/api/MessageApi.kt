@@ -16,7 +16,7 @@ class MessageApi(var messageService: MessageService) {
 
     @GetMapping("/messages")
     @ResponseStatus(HttpStatus.OK)
-    fun getMessagesForChat(@RequestParam(value = "chatId", required = true) chatId : Int): Optional<Messages> {
+    fun getMessagesForChat(@RequestParam(value = "chatId", required = true) chatId : Int): Optional<List<Messages>> {
         return messageService.getMessages(chatId)
     }
 
