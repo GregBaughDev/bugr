@@ -14,8 +14,6 @@ class Reviews (
     var userReviewed: Int,
     @Column(name="AUTHOR")
     var author: Int,
-    @Column(name="DATE")
-    var date: Date,
     @Column(name="REVIEW")
     var review: String
     ){
