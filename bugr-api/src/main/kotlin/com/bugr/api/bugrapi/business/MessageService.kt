@@ -12,4 +12,8 @@ class MessageService(val messageRepository: MessageRepository) {
         return messageRepository.getAllChatMessages(chatId)
     }
 
+    fun postMessage(message: Messages): Messages {
+        return messageRepository.save(message)
+    }
+
 }
