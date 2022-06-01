@@ -3,7 +3,10 @@ package com.bugr.api.bugrapi.v1.api
 import com.bugr.api.bugrapi.business.MessageService
 import com.bugr.api.bugrapi.models.Messages
 import org.springframework.http.HttpStatus
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
@@ -18,6 +21,12 @@ class MessageApi(var messageService: MessageService) {
     @ResponseStatus(HttpStatus.OK)
     fun getMessagesForChat(@RequestParam(value = "chatId", required = true) chatId : Int): Optional<List<Messages>> {
         return messageService.getMessages(chatId)
+    }
+
+    @PostMapping("/messages", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus(HttpStatus.CREATED)
+    fun saveNewMessage(@RequestBody message: Messages): Messages {
+        return messageService.postMessage(message)
     }
 
 }
