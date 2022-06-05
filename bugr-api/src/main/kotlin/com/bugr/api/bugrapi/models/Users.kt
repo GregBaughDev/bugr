@@ -34,5 +34,4 @@ class Users (
     var aboutBug: String,
     @Column(name = "IS_CONFIRMED")
     var isConfirmed: Boolean,
-    ) {
-}
+    )

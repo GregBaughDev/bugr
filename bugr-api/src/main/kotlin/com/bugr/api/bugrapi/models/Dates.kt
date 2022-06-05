@@ -16,5 +16,4 @@ class Dates (
     var dateFrom: Date,
     @Column(name = "DATE_TO")
     var dateTo: Date
-    ){
-}
+    )

@@ -13,5 +13,4 @@ class Messages (
     var chatId: Int,
     @Column(name = "MESSAGE")
     var message: String
-    ) {
-}
+    )

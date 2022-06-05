@@ -12,6 +12,10 @@ class ReviewService(val reviewRepository: ReviewRepository) {
         return reviewRepository.getAllReviewsForUser(id)
     }
 
+    fun getReviewById(id: Int): Optional<Reviews> {
+        return reviewRepository.getIndividualReview(id)
+    }
+
     fun saveReview(reviews: Reviews): Reviews {
         return reviewRepository.save(reviews)
     }

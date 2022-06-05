@@ -15,4 +15,10 @@ interface ReviewRepository : JpaRepository<Reviews, Int> {
     )
     fun getAllReviewsForUser(id: Int): Optional<List<Reviews>>
 
+    @Query(
+        value = "SELECT * FROM reviews WHERE review_id = :reviewId",
+        nativeQuery = true
+    )
+    fun getIndividualReview(reviewId: Int): Optional<Reviews>
+
 }

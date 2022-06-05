@@ -13,5 +13,4 @@ class Chats (
     var fromUser: Int,
     @Column(name = "TO_USER")
     var toUser: Int
-    ){
-}
+    )

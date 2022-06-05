@@ -16,5 +16,4 @@ class Reviews (
     var author: Int,
     @Column(name="REVIEW")
     var review: String
-    ){
-}
+    )

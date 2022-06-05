@@ -2,6 +2,7 @@ package com.bugr.api.bugrapi.v1.api
 
 import com.bugr.api.bugrapi.business.ReviewService
 import com.bugr.api.bugrapi.models.Reviews
+import com.bugr.api.bugrapi.models.mutations.ReviewsMutation
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -29,8 +30,12 @@ class ReviewApi(var reviewService: ReviewService) {
         return reviewService.deleteReview(reviewId)
     }
 
-//    @PatchMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
-//    @ResponseStatus(HttpStatus.OK)
-    // TO DO: PATCH to update a review
+    @PatchMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus(HttpStatus.OK)
+    fun updateReview(@RequestBody reviewMutation: ReviewsMutation): Reviews {
+        val currentReview = reviewService.getReviewById(reviewMutation.reviewId)
+        val updatedReview = Reviews(reviewMutation.reviewId, currentReview.get().userReviewed, currentReview.get().author, reviewMutation.review)
+        return reviewService.saveReview(updatedReview)
+    }
 
 }
