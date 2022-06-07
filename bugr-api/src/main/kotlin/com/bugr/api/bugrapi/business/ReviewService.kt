@@ -20,7 +20,7 @@ class ReviewService(val reviewRepository: ReviewRepository) {
         return reviewRepository.save(reviews)
     }
 
-    fun deleteReview(reviewId: Int): Unit {
+    fun deleteReview(reviewId: Int) {
         return reviewRepository.deleteById(reviewId)
     }
 

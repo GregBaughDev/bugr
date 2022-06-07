@@ -13,7 +13,7 @@ class Dates (
     @Column(name = "USER_DATES")
     var userDates: Int,
     @Column(name = "DATE_FROM")
-    var dateFrom: Date,
+    var dateFrom: Date?,
     @Column(name = "DATE_TO")
-    var dateTo: Date
+    var dateTo: Date?
     )
