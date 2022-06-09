@@ -33,10 +33,7 @@ class ReviewApi(var reviewService: ReviewService) {
     @PatchMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
     fun updateReview(@RequestBody reviewMutation: ReviewsMutation): Reviews {
-        // Move below into reviewService
-        val currentReview = reviewService.getReviewById(reviewMutation.reviewId)
-        val updatedReview = Reviews(reviewMutation.reviewId, currentReview.get().userReviewed, currentReview.get().author, reviewMutation.review)
-        return reviewService.saveReview(updatedReview)
+        return reviewService.updateReview(reviewMutation)
     }
 
 }

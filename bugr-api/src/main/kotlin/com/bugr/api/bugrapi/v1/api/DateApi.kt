@@ -27,15 +27,6 @@ class DateApi(var dateService: DateService) {
     @PatchMapping("/dates", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
     fun updateDate(@RequestBody datesMutation: DatesMutation): Dates {
-        // Move below into dateService
-        val currentDates = dateService.getDatesById(datesMutation.userDates)
-        val updatedDates = Dates(
-            datesMutation.dateId,
-            datesMutation.userDates,
-            if (datesMutation.dateFrom != null) datesMutation.dateFrom else currentDates[0].dateFrom,
-            if (datesMutation.dateTo != null) datesMutation.dateTo else currentDates[0].dateTo
-        )
-        return dateService.saveDates(updatedDates)
+        return dateService.updateDates(datesMutation)
     }
-
 }
