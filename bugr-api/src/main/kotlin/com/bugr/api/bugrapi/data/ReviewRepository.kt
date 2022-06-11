@@ -17,7 +17,7 @@ interface ReviewRepository : JpaRepository<Reviews, Int> {
         nativeQuery = true
     )
     fun getAllReviewsForUser(id: Int): Optional<List<Reviews>>
-    
+
     @Modifying
     @Query(
         value = "UPDATE reviews SET review = :review WHERE review_id = :reviewId",
