@@ -17,18 +17,7 @@ class DateService(val dateRepository: DateRepository) {
         return dateRepository.save(dates)
     }
 
-    fun getDatesById(id: Int): List<Dates> {
-        return dateRepository.getDatesById(id)
-    }
-
-    fun updateDates(datesMutation: DatesMutation): Dates {
-        val currentDates = this.getDatesById(datesMutation.dateId)
-        val updatedDates = Dates(
-            datesMutation.dateId,
-            datesMutation.userDates,
-            if (datesMutation.dateFrom != null) datesMutation.dateFrom else currentDates[0].dateFrom,
-            if (datesMutation.dateTo != null) datesMutation.dateTo else currentDates[0].dateTo
-        )
-        return this.saveDates(updatedDates)
+    fun updateDates(datesMutation: DatesMutation): Int {
+        return dateRepository.updateDates(datesMutation.userDates, datesMutation.dateId, datesMutation.dateFrom, datesMutation.dateTo)
     }
 }

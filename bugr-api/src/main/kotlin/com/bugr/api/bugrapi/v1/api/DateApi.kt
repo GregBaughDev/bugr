@@ -26,7 +26,7 @@ class DateApi(var dateService: DateService) {
 
     @PatchMapping("/dates", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
-    fun updateDate(@RequestBody datesMutation: DatesMutation): Dates {
+    fun updateDate(@RequestBody datesMutation: DatesMutation): Int {
         return dateService.updateDates(datesMutation)
     }
 }
