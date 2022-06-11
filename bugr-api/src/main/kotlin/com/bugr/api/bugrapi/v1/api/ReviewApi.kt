@@ -32,7 +32,7 @@ class ReviewApi(var reviewService: ReviewService) {
 
     @PatchMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
-    fun updateReview(@RequestBody reviewMutation: ReviewsMutation): Reviews {
+    fun updateReview(@RequestBody reviewMutation: ReviewsMutation): Int {
         return reviewService.updateReview(reviewMutation)
     }
 

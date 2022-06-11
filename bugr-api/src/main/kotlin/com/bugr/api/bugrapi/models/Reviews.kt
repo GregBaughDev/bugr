@@ -1,6 +1,5 @@
 package com.bugr.api.bugrapi.models
 
-import java.util.Date
 import javax.persistence.*
 
 @Entity

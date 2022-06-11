@@ -13,10 +13,6 @@ class ReviewService(val reviewRepository: ReviewRepository) {
         return reviewRepository.getAllReviewsForUser(id)
     }
 
-    fun getReviewById(id: Int): Optional<Reviews> {
-        return reviewRepository.getIndividualReview(id)
-    }
-
     fun saveReview(reviews: Reviews): Reviews {
         return reviewRepository.save(reviews)
     }
@@ -25,15 +21,8 @@ class ReviewService(val reviewRepository: ReviewRepository) {
         return reviewRepository.deleteById(reviewId)
     }
 
-    fun updateReview(reviewMutation: ReviewsMutation): Reviews {
-        val currentReview = this.getReviewById(reviewMutation.reviewId)
-        val updatedReview = Reviews(
-            reviewMutation.reviewId,
-            currentReview.get().userReviewed,
-            currentReview.get().author,
-            reviewMutation.review
-        )
-        return this.saveReview(updatedReview)
+    fun updateReview(reviewMutation: ReviewsMutation): Int {
+        return reviewRepository.updateReview(reviewMutation.reviewId, reviewMutation.review)
     }
 
 }
