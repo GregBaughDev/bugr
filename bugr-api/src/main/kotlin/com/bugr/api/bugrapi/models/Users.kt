@@ -18,15 +18,16 @@ class Users (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var userId: Int,
     @Column(name = "USERNAME")
-    var userName: String,
-//    @Column(name = "USER_PASSWORD")
-//    var userPassword: String,
-//    @Column(name = "EMAIL")
-//    var email: String,
+    var username: String,
+    @Column(name = "USER_PASSWORD")
+    var userPassword: String,
+    @Column(name = "EMAIL")
+    var email: String,
     @Column(name = "LOCATION")
     var location: String,
     @Column(name = "STATE")
-    var state: String,
+    @Enumerated(EnumType.STRING)
+    var state: State,
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_TYPE")
     var userType: UserType,

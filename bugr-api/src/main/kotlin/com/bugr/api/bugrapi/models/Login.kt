@@ -1,4 +1,14 @@
 package com.bugr.api.bugrapi.models
 
-class Login (var user: Users, var reviews: ArrayList<Reviews>) {
+data class LoginForm (var username: String, var password: String)
+
+interface LoggedInUser {
+    var userId: Int
+    var username: String
+    var email: String
+    var location: String
+    var state: State
+    var userType: UserType
+    var aboutBug: String
+    var isConfirmed: Boolean
 }
