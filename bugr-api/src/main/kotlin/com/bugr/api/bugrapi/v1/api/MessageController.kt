@@ -15,7 +15,7 @@ import java.util.Optional
 
 @RestController
 @RequestMapping("/api/v1")
-class MessageApi(var messageService: MessageService) {
+class MessageController(private val messageService: MessageService) {
 
     @GetMapping("/messages")
     @ResponseStatus(HttpStatus.OK)

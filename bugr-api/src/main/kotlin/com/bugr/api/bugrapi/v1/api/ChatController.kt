@@ -12,7 +12,7 @@ import java.util.Optional
 
 @RestController
 @RequestMapping("/api/v1")
-class ChatApi(var chatService: ChatService) {
+class ChatController(private val chatService: ChatService) {
 
     @GetMapping("/chats")
     @ResponseStatus(HttpStatus.OK)

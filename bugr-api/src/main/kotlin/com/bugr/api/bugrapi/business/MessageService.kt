@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class MessageService(val messageRepository: MessageRepository) {
+class MessageService(private val messageRepository: MessageRepository) {
 
     fun getMessages(chatId: Int): Optional<List<Messages>> {
         return messageRepository.getAllChatMessages(chatId)

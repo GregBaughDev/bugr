@@ -10,7 +10,7 @@ import java.util.Optional
 
 @RestController
 @RequestMapping("/api/v1")
-class ReviewApi(var reviewService: ReviewService) {
+class ReviewController(private val reviewService: ReviewService) {
 
     @GetMapping("/reviews")
     @ResponseStatus(HttpStatus.OK)
@@ -26,7 +26,7 @@ class ReviewApi(var reviewService: ReviewService) {
 
     @DeleteMapping("/reviews")
     @ResponseStatus(HttpStatus.OK)
-    fun deleteReview(@RequestParam(value = "reviewId", required = true) reviewId: Int): Unit {
+    fun deleteReview(@RequestParam(value = "reviewId", required = true) reviewId: Int) {
         return reviewService.deleteReview(reviewId)
     }
 

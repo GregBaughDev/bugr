@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.util.Optional
 
 @Service
-class DateService(val dateRepository: DateRepository) {
+class DateService(private val dateRepository: DateRepository) {
 
     fun getAllDatesForUser(id: Int): Optional<List<Dates>> {
         return dateRepository.getAllDatesForUser(id)

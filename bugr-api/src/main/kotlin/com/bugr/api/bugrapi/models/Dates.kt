@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "DATES")
-class Dates (
+data class Dates (
     @Id
     @Column(name = "DATE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,7 +2,7 @@ package com.bugr.api.bugrapi.models.mutations
 
 import java.util.Date
 
-class DatesMutation(
+data class DatesMutation(
     var dateId: Int,
     var userDates: Int,
     var dateFrom: Date,

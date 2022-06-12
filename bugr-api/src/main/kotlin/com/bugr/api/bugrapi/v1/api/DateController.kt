@@ -10,7 +10,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/api/v1")
-class DateApi(var dateService: DateService) {
+class DateController(private val dateService: DateService) {
 
     @GetMapping("/dates")
     @ResponseStatus(HttpStatus.OK)

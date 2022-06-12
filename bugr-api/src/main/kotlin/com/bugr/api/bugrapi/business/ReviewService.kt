@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class ReviewService(val reviewRepository: ReviewRepository) {
+class ReviewService(private val reviewRepository: ReviewRepository) {
 
     fun getReviews(id: Int): Optional<List<Reviews>> {
         return reviewRepository.getAllReviewsForUser(id)
