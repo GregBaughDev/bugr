@@ -10,5 +10,5 @@ interface LoggedInUser {
     var state: State
     var userType: UserType
     var aboutBug: String
-    var isConfirmed: Boolean
+    var confirmed: Boolean
 }
