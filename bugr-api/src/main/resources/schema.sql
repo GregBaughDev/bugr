@@ -1,13 +1,11 @@
-CREATE TYPE state AS ENUM ('VIC', 'NSW', 'QLD', 'SA', 'WA', 'NT', 'TAS', 'ACT');
-CREATE TYPE user_type AS ENUM ('SEEKING', 'OFFERING', 'CARER');
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
     user_password VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     location VARCHAR(100) NOT NULL,
-   	state state NOT NULL,
-	user_type user_type NOT NULL,
+   	state VARCHAR(10) NOT NULL,
+	user_type VARCHAR(10) NOT NULL,
     about_bug VARCHAR(10000) NOT NULL,
     is_confirmed BOOLEAN NOT NULL DEFAULT FALSE,
     date_registered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP

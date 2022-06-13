@@ -9,11 +9,11 @@ data class Dates (
     @Id
     @Column(name = "DATE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var dateId: Int,
+    val dateId: Int,
     @Column(name = "USER_DATES")
-    var userDates: Int,
+    val userDates: Int,
     @Column(name = "DATE_FROM")
-    var dateFrom: Date?,
+    val dateFrom: Date?,
     @Column(name = "DATE_TO")
-    var dateTo: Date?
+    val dateTo: Date?
     )

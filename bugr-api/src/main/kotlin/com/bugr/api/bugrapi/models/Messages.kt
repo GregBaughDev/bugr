@@ -8,9 +8,9 @@ data class Messages (
     @Id
     @Column(name = "MESSAGE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var messageId: Int,
+    val messageId: Int,
     @Column(name = "CHAT_ID")
-    var chatId: Int,
+    val chatId: Int,
     @Column(name = "MESSAGE")
-    var message: String
+    val message: String
     )

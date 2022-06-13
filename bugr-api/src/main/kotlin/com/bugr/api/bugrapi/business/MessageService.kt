@@ -9,10 +9,12 @@ import java.util.*
 class MessageService(private val messageRepository: MessageRepository) {
 
     fun getMessages(chatId: Int): Optional<List<Messages>> {
+        // EXCEPTION TO DO -> Generic server error
         return messageRepository.getAllChatMessages(chatId)
     }
 
     fun postMessage(message: Messages): Messages {
+        // EXCEPTION TO DO -> Message must have body + generic server issue
         return messageRepository.save(message)
     }
 

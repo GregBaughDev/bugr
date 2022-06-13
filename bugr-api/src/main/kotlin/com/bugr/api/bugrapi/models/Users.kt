@@ -16,23 +16,23 @@ data class Users (
     @Id
     @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var userId: Int,
+    val userId: Int,
     @Column(name = "USERNAME")
-    var username: String,
+    val username: String,
     @Column(name = "USER_PASSWORD")
-    var userPassword: String,
+    val userPassword: String,
     @Column(name = "EMAIL")
-    var email: String,
+    val email: String,
     @Column(name = "LOCATION")
-    var location: String,
+    val location: String,
     @Column(name = "STATE")
     @Enumerated(EnumType.STRING)
     var state: State,
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_TYPE")
-    var userType: UserType,
+    val userType: UserType,
     @Column(name = "ABOUT_BUG")
-    var aboutBug: String,
+    val aboutBug: String,
     @Column(name = "IS_CONFIRMED")
-    var isConfirmed: Boolean,
+    val isConfirmed: Boolean,
     )

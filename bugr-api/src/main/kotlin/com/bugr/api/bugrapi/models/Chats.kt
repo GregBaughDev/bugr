@@ -8,9 +8,9 @@ data class Chats (
     @Id
     @Column(name = "CHAT_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var chatId: Int,
+    val chatId: Int,
     @Column(name = "FROM_USER")
-    var fromUser: Int,
+    val fromUser: Int,
     @Column(name = "TO_USER")
-    var toUser: Int
+    val toUser: Int
     )

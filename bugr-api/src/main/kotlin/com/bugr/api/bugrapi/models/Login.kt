@@ -1,14 +1,14 @@
 package com.bugr.api.bugrapi.models
 
-data class LoginForm (var username: String, var password: String)
+data class LoginForm (val username: String, val password: String)
 
 interface LoggedInUser {
-    var userId: Int
-    var username: String
-    var email: String
-    var location: String
-    var state: State
-    var userType: UserType
-    var aboutBug: String
-    var confirmed: Boolean
+    val userId: Int
+    val username: String
+    val email: String
+    val location: String
+    val state: State
+    val userType: UserType
+    val aboutBug: String
+    val confirmed: Boolean
 }

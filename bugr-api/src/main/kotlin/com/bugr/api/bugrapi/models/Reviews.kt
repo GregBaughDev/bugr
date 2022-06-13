@@ -8,11 +8,11 @@ data class Reviews (
     @Id
     @Column(name = "REVIEW_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var reviewId: Int,
+    val reviewId: Int,
     @Column(name="USER_REVIEWED")
-    var userReviewed: Int,
+    val userReviewed: Int,
     @Column(name="AUTHOR")
-    var author: Int,
+    val author: Int,
     @Column(name="REVIEW")
-    var review: String
+    val review: String
     )
