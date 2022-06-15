@@ -2,6 +2,7 @@ package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.ReviewRepository
 import com.bugr.api.bugrapi.models.Reviews
+import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
 import com.bugr.api.bugrapi.models.mutations.ReviewsMutation
 import org.springframework.stereotype.Service
 import java.util.*
@@ -26,6 +27,7 @@ class ReviewService(private val reviewRepository: ReviewRepository) {
 
     fun updateReview(reviewMutation: ReviewsMutation): Int {
         // EXCEPTION TO DO -> Confirm body has text + generic server error
+        if (reviewMutation.review.length < 10) throw InvalidInputException()
         return reviewRepository.updateReview(reviewMutation.reviewId, reviewMutation.review)
     }
 
