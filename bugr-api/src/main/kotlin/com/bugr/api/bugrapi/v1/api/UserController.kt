@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController
 class UserController(private val userService: UserService) {
 
     @PostMapping("/users", consumes = [MediaType.APPLICATION_JSON_VALUE])
-    @ResponseStatus(HttpStatus.OK)
     fun userLogin(@RequestBody login: LoginForm): LoggedInUser {
         return userService.userLogin(login.username, login.password)
     }

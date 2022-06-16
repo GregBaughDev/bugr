@@ -13,25 +13,22 @@ import java.util.Optional
 class ReviewController(private val reviewService: ReviewService) {
 
     @GetMapping("/reviews")
-    @ResponseStatus(HttpStatus.OK)
     fun getReviewsForUser(@RequestParam(value = "id", required = true) id: Int): Optional<List<Reviews>> {
         return reviewService.getReviews(id)
     }
 
     @PostMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     fun saveNewReview(@RequestBody reviews: Reviews): Reviews {
         return reviewService.saveReview(reviews)
     }
 
     @DeleteMapping("/reviews")
-    @ResponseStatus(HttpStatus.OK)
     fun deleteReview(@RequestParam(value = "reviewId", required = true) reviewId: Int) {
         return reviewService.deleteReview(reviewId)
     }
 
     @PatchMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
-    @ResponseStatus(HttpStatus.OK)
     fun updateReview(@RequestBody reviewMutation: ReviewsMutation): Int {
         return reviewService.updateReview(reviewMutation)
     }

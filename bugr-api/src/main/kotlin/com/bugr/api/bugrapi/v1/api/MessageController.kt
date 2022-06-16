@@ -18,7 +18,6 @@ import java.util.Optional
 class MessageController(private val messageService: MessageService) {
 
     @GetMapping("/messages")
-    @ResponseStatus(HttpStatus.OK)
     fun getMessagesForChat(@RequestParam(value = "chatId", required = true) chatId : Int): Optional<List<Messages>> {
         return messageService.getMessages(chatId)
     }

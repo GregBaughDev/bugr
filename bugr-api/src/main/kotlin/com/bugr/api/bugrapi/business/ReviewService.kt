@@ -26,8 +26,7 @@ class ReviewService(private val reviewRepository: ReviewRepository) {
     }
 
     fun updateReview(reviewMutation: ReviewsMutation): Int {
-        // EXCEPTION TO DO -> Confirm body has text + generic server error
-        if (reviewMutation.review.length < 10) throw InvalidInputException()
+        if (reviewMutation.review.length <= 10) throw InvalidInputException()
         return reviewRepository.updateReview(reviewMutation.reviewId, reviewMutation.review)
     }
 
