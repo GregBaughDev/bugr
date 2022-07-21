@@ -8,3 +8,4 @@ import org.springframework.web.bind.annotation.ResponseStatus
     reason = "Input is invalid"
 )
 class InvalidInputException() : Exception()
+// LOOK INTO PASSING A CUSTOM EXCEPTION MESSAGE THROUGH

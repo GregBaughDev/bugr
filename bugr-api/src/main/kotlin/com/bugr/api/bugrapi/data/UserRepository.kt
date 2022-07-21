@@ -14,4 +14,16 @@ interface UserRepository : JpaRepository<Users, Int> {
         nativeQuery = true
     )
     fun userLogin(username: String, password: String): LoggedInUser
+
+    @Query(
+        value = "SELECT COUNT(users) FROM users WHERE username = :username",
+        nativeQuery = true
+    )
+    fun checkUsernameExists(username: String): Int
+
+    @Query(
+        value = "SELECT COUNT(users) FROM users WHERE email = :email",
+        nativeQuery = true
+    )
+    fun checkEmailExists(email: String): Int
 }
