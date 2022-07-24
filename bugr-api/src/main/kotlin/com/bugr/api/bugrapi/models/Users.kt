@@ -20,14 +20,14 @@ data class Users (
     @Column(name = "USERNAME")
     val username: String,
     @Column(name = "USER_PASSWORD")
-    val userPassword: String,
+    var password: String,
     @Column(name = "EMAIL")
     val email: String,
     @Column(name = "LOCATION")
     val location: String,
     @Column(name = "STATE")
     @Enumerated(EnumType.STRING)
-    var state: State,
+    val state: State,
     @Enumerated(EnumType.STRING)
     @Column(name = "USER_TYPE")
     val userType: UserType,

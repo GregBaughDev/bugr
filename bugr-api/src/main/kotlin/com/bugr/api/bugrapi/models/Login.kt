@@ -5,6 +5,7 @@ data class LoginForm (val username: String, val password: String)
 interface LoggedInUser {
     val userId: Int
     val username: String
+    val password: String
     val email: String
     val location: String
     val state: State
