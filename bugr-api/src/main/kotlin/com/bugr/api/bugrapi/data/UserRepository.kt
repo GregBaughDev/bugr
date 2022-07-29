@@ -3,8 +3,10 @@ package com.bugr.api.bugrapi.data
 import com.bugr.api.bugrapi.models.LoggedInUser
 import com.bugr.api.bugrapi.models.Users
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
+import javax.transaction.Transactional
 
 @Repository
 interface UserRepository : JpaRepository<Users, Int> {
@@ -26,4 +28,12 @@ interface UserRepository : JpaRepository<Users, Int> {
         nativeQuery = true
     )
     fun checkEmailExists(email: String): Int
+
+    @Transactional
+    @Modifying
+    @Query(
+        value = "UPDATE users SET is_confirmed = true WHERE user_id = :id",
+        nativeQuery = true
+    )
+    fun confirmUser(id: Int): Int
 }
