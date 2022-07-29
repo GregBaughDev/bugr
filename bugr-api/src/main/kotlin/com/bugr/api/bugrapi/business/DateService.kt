@@ -2,25 +2,33 @@ package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.DateRepository
 import com.bugr.api.bugrapi.models.Dates
+import com.bugr.api.bugrapi.models.exceptions.InvalidDateException
 import com.bugr.api.bugrapi.models.mutations.DatesMutation
 import org.springframework.stereotype.Service
-import java.util.Optional
+import java.util.*
 
 @Service
 class DateService(private val dateRepository: DateRepository) {
 
+    fun validateDates(from: Date, to: Date): Boolean {
+        return from.before(to) || from == to
+    }
+
     fun getAllDatesForUser(id: Int): Optional<List<Dates>> {
-        // EXCEPTION TO DO -> User doesn't exist + generic server error
         return dateRepository.getAllDatesForUser(id)
     }
 
     fun saveDates(dates: Dates): Dates {
-        // EXCEPTION TO DO -> Validate end date is after start date + generic server error
+        if (dates.dateTo === null ||
+            dates.dateFrom === null ||
+            !validateDates(dates.dateFrom, dates.dateTo)) throw InvalidDateException()
+
         return dateRepository.save(dates)
     }
 
     fun updateDates(datesMutation: DatesMutation): Int {
-        // EXCEPTION TO DO -> Validate end date is after start date + generic server error
+        if (!validateDates(datesMutation.dateFrom, datesMutation.dateTo)) throw InvalidDateException()
+
         return dateRepository.updateDates(datesMutation.userDates, datesMutation.dateId, datesMutation.dateFrom, datesMutation.dateTo)
     }
 }

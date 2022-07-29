@@ -9,7 +9,6 @@ import java.util.Optional
 class ChatService(private val chatRepository: ChatRepository) {
 
     fun getAllChatsForUser(id: Int): Optional<Chats> {
-        // EXCEPTION TO DO -> Generic server error
         return chatRepository.getAllChatsForUser(id)
     }
 

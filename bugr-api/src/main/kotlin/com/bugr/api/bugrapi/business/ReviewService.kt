@@ -11,22 +11,22 @@ import java.util.*
 class ReviewService(private val reviewRepository: ReviewRepository) {
 
     fun getReviews(id: Int): Optional<List<Reviews>> {
-        // EXCEPTION TO DO -> Generic server error
         return reviewRepository.getAllReviewsForUser(id)
     }
 
     fun saveReview(reviews: Reviews): Reviews {
-        // EXCEPTION TO DO -> Confirm body has text + generic server error
+        if (reviews.review.isEmpty()) throw InvalidInputException()
+
         return reviewRepository.save(reviews)
     }
 
     fun deleteReview(reviewId: Int) {
-        // EXCEPTION TO DO -> generic server error
         return reviewRepository.deleteById(reviewId)
     }
 
     fun updateReview(reviewMutation: ReviewsMutation): Int {
         if (reviewMutation.review.length <= 10) throw InvalidInputException()
+
         return reviewRepository.updateReview(reviewMutation.reviewId, reviewMutation.review)
     }
 
