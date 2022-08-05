@@ -16,8 +16,8 @@
   }
 </script>
 
-<div class="flex flex-col">
+<div class="flex flex-col w-2/12">
   {#each navItems as nav }
-    <h2 on:click={() => handleClick(nav)}>{nav}</h2>
+    <h3 on:click={() => handleClick(nav)}>{nav}</h3>
   {/each}
 </div>
