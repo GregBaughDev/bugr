@@ -1,7 +1,8 @@
 <script lang="ts">
+  import { currentPage } from '../state/globalStore'
   import { NavLinks } from '../types/types'
   
-  const navItems: String[] = [
+  const navItems: NavLinks[] = [
     NavLinks.Home,
     NavLinks.Login,
     NavLinks.Messages,
@@ -10,9 +11,8 @@
     NavLinks.About  
   ]
 
-  const handleClick = (link: String): void => {
-    console.log(`clicked ${link}`)
-    // Set main display element to the requested link
+  const handleClick = (link: NavLinks): void => {
+    $currentPage = link
   }
 </script>
 

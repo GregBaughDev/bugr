@@ -1,12 +1,9 @@
 <script lang="ts">
-  import currentPage from '../state/globalStore.svelte'
+  import { currentPage } from '../state/globalStore'
   import type { NavLinks } from '../types/types'
-  
-  let page: NavLinks
-
 
 </script>
 
 <div>
-    
+    <h2>{$currentPage}</h2>
 </div>
