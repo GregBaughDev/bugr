@@ -1,16 +1,7 @@
 <script lang="ts">
   import { currentPage } from '../state/globalStore'
-  import { NavLinks } from '../types/types'
+  import { navItems, NavLinks } from '../types/types'
   
-  const navItems: NavLinks[] = [
-    NavLinks.Home,
-    NavLinks.Login,
-    NavLinks.Messages,
-    NavLinks.Profile,
-    NavLinks.Search,
-    NavLinks.About  
-  ]
-
   const handleClick = (link: NavLinks): void => {
     $currentPage = link
   }
