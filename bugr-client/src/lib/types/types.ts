@@ -1,6 +1,7 @@
 export enum NavLinks {
     Home = "home",
     Login = "login",
+    Logout = "logout",
     Messages = "messages",
     Profile = "profile",
     Search = "search",
@@ -10,10 +11,11 @@ export enum NavLinks {
 
   export const navItems: NavLinks[] = [ 
     NavLinks.Home, 
-    NavLinks.Login, 
+    NavLinks.Login,
+    NavLinks.Logout,
+    NavLinks.About, 
+    NavLinks.Rules,
     NavLinks.Messages, 
     NavLinks.Profile, 
     NavLinks.Search, 
-    NavLinks.About, 
-    NavLinks.Rules
   ]
