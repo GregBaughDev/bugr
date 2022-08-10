@@ -1,3 +1,9 @@
+<script lang="ts">
+  import { userLogin } from '../../../api/users'
+  // BIND VARIABLES TO THE FORM AND SUBMIT
+</script>
+<!-- LOGIN FUNCTION -->
+<!-- CHECK IF DATA NEEDS TO SANITISED -->
 <h2>Login</h2>
 
 <div class='flex flex-col w-full items-center mt-8'>
@@ -14,4 +20,5 @@
       <button type='submit' class='border-white border-2 p-4 rounded-xl w-1/3 font-bold'>Log in</button>
     </div>
   </form>
+  <!-- SIGN UP FLOW -->
 </div>

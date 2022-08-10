@@ -1,7 +1,7 @@
 <script lang="ts">
   import { currentPage, userLoggedIn } from '../state/globalStore'
   import { navItems, NavLinks } from '../types/types'
-  // ADD A FILTER FOR LOGIN VARIABLE AND DISPLAY LOGIN/OUT ACCORDINGLY
+
   const handleClick = (link: NavLinks): void => {
     $currentPage = link
   }
