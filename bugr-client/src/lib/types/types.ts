@@ -9,13 +9,13 @@ export enum NavLinks {
     Rules = "rules"
   }
 
-  export const navItems: NavLinks[] = [ 
-    NavLinks.Home, 
-    NavLinks.Login,
-    NavLinks.Logout,
-    NavLinks.About, 
-    NavLinks.Rules,
-    NavLinks.Messages, 
-    NavLinks.Profile, 
-    NavLinks.Search, 
+  export const navItems: {link: NavLinks, auth: boolean}[] = [
+    { link: NavLinks.Home, auth: false },
+    { link: NavLinks.Login, auth: false },
+    { link: NavLinks.Logout, auth: true },
+    { link: NavLinks.About, auth: false },
+    { link: NavLinks.Rules, auth: false },
+    { link: NavLinks.Messages, auth: true },
+    { link: NavLinks.Profile, auth: true },
+    { link: NavLinks.Search, auth: true },
   ]
