@@ -31,13 +31,8 @@ import javax.servlet.http.HttpServletResponse
 class UserController(private val userService: UserService) {
 
     @PostMapping("/users", consumes = [MediaType.APPLICATION_JSON_VALUE])
-    fun userLogin(@RequestBody login: LoginForm, response: HttpServletResponse): LoggedInUser? {
-        // LOOK AT RESPONSE ENTITY
-        // SORT OUT CROSS ORIGIN ISSUES - MOVE METHODS TO TRY CATCH AND WORK OUT HOW TO DEAL WITH RESPONSE ON CLIENT
-        // MOVE RETRIEVE INFORMATION TO ANOTHER METHOD AND JUST SET A HEADER WHICH CAN THEN RETRIEVE INFORMATION TO DISPLAY TO USER
-        // ADD AUTH HEADER COOKIE
-        var cookie: Cookie = Cookie("test", "Greg")
-        response.addCookie(cookie)
+    fun userLogin(@RequestBody login: LoginForm): LoggedInUser? {
+        // SORT OUT SECURITY ISSUES WITH SPRING SECURITY
         return userService.userLogin(login.username, login.password)
     }
 

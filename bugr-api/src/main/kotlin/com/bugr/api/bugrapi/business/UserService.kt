@@ -30,7 +30,8 @@ class UserService(private val userRepository: UserRepository) {
         if (userResult == null || !BCrypt.checkpw(password, userResult.password)) {
             throw UserException(UserExceptionResponse.INCORRECT_CREDENTIALS.responseToString())
         }
-        // TO DO -> REMOVING PASSWORD FROM OBJECT
+        // TO DO -> REMOVING PASSWORD FROM OBJECT -> LOOK INTO A BETTER WAY THAN BELOW
+        userResult.password = ""
         return userResult
     }
 
