@@ -19,3 +19,20 @@ export enum NavLinks {
     { link: NavLinks.Profile, auth: true },
     { link: NavLinks.Search, auth: true },
   ]
+
+  enum UserType {
+    Seeking,
+    Offering,
+    Carer
+  }
+  
+  export interface User {
+    userId: string
+    username: string
+    email: string
+    location: string
+    state: string
+    userType: UserType
+    aboutBug: string
+    confirmed: boolean
+  }
