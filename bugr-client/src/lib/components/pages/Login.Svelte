@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { NavLinks } from '../../types/types'
   import { userLogin } from '../../../api/users'
+  import { userLoggedIn, currentPage } from '../../state/globalStore'
 
   const userInfo: {username: string, password: string} = {
     username: undefined,
@@ -7,8 +9,8 @@
   }
 
   const handleSubmit = (): void => {
-    console.log(userInfo)
     userLogin({ username: userInfo.username, password: userInfo.password})
+    if ($userLoggedIn) currentPage.set(NavLinks.Profile)
   }
 </script>
 <!-- LOGIN FUNCTION -->

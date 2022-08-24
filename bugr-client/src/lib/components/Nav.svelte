@@ -12,7 +12,9 @@
 </script>
 
 <div class="flex flex-col w-2/12">
-  {#each filterNavItems(navItems) as nav }
-    <h3 on:click={() => handleClick(nav.link)}>{nav.link}</h3>
-  {/each}
+  {#key $userLoggedIn}
+    {#each filterNavItems(navItems) as nav }
+      <h3 on:click={() => handleClick(nav.link)}>{nav.link}</h3>
+    {/each}
+  {/key}
 </div>
