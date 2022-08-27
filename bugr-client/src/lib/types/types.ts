@@ -9,15 +9,15 @@ export enum NavLinks {
     Rules = "rules"
   }
 
-  export const navItems: {link: NavLinks, auth: boolean}[] = [
-    { link: NavLinks.Home, auth: false },
-    { link: NavLinks.Login, auth: false },
-    { link: NavLinks.Logout, auth: true },
-    { link: NavLinks.About, auth: false },
-    { link: NavLinks.Rules, auth: false },
-    { link: NavLinks.Messages, auth: true },
-    { link: NavLinks.Profile, auth: true },
-    { link: NavLinks.Search, auth: true },
+  export const navItems: {link: NavLinks, route: string}[] = [
+    { link: NavLinks.Home, route: '/' },
+    { link: NavLinks.Login, route: '/login' },
+    { link: NavLinks.Logout, route: '/logout' },
+    { link: NavLinks.About, route: '/about' },
+    { link: NavLinks.Rules, route: '/rules' },
+    { link: NavLinks.Messages, route: '/messages' },
+    { link: NavLinks.Profile, route: '/profile' },
+    { link: NavLinks.Search, route: '/search' },
   ]
 
   enum UserType {

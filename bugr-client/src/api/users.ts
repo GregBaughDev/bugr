@@ -13,6 +13,6 @@ export const userLogin = async (data): Promise<void> => {
       userLoggedIn.set(true)
     }
   } catch (e) {
-    console.log({ e })
+    console.error({ e })
   }
 }
