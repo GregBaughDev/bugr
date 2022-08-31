@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { NavLinks } from '../../types/types'
   import { userLogin } from '../../../api/users'
   import { userLoggedIn } from '../../state/globalStore'
 
@@ -10,7 +9,6 @@
 
   const handleSubmit = (): void => {
     userLogin({ username: userInfo.username, password: userInfo.password})
-    // ROUTE
   }
 </script>
 <!-- LOGIN FUNCTION -->
