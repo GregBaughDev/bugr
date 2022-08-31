@@ -1,3 +1,4 @@
+import { push } from "svelte-spa-router"
 import { ApiRoutesUsers } from "./types"
 import { userDetails } from "../lib/state/userStore"
 import { userLoggedIn } from "../lib/state/globalStore"
@@ -11,6 +12,7 @@ export const userLogin = async (data): Promise<void> => {
     } else {
       userDetails.set(result)
       userLoggedIn.set(true)
+      push('/profile')
     }
   } catch (e) {
     console.error({ e })
