@@ -6,6 +6,7 @@
   import Home from './lib/components/pages/Home.svelte'
   import About from './lib/components/pages/About.svelte'
   import Login from './lib/components/pages/Login.svelte'
+  import Logout from './lib/components/pages/Logout.svelte'
   import Messages from './lib/components/pages/Messages.svelte'
   import Profile from './lib/components/pages/Profile.svelte'
   import Rules from './lib/components/pages/Rules.svelte'
@@ -25,6 +26,12 @@
     '/': Home,
     '/about': About,
     '/login': Login,
+    '/logout': wrap({
+      component: Logout,
+      conditions: [
+        () => checkUserAuthOrRedirect($userLoggedIn)
+      ]
+    }),
     '/messages': wrap({
       component: Messages,
       conditions: [
