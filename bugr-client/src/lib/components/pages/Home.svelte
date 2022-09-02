@@ -1,5 +1,5 @@
-<div class="flex flex-row items-center justify-around">
-  <div class="w-2/5">
+<div class="flex flex-row items-center justify-around mt-8 w-10/12 p-4">
+  <div class="w-1/5">
     <img class="w-full" src="src/assets/bugr_logo.svg" alt="bugr logo">
   </div>
   <div class="w-2/5">
