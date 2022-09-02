@@ -1,6 +1,5 @@
 <script lang="ts">
   import { userLogin } from '../../../api/users'
-  import { userLoggedIn } from '../../state/globalStore'
 
   const userInfo: {username: string, password: string} = {
     username: undefined,
@@ -11,7 +10,7 @@
     userLogin({ username: userInfo.username, password: userInfo.password})
   }
 </script>
-<!-- LOGIN FUNCTION -->
+<!-- TODO: INCORRECT CREDENTIALS DISPLAY -->
 <!-- CHECK IF DATA NEEDS TO SANITISED -->
 <!-- validate the form inputs -->
 <div class="w-10/12 p-4">
@@ -30,6 +29,8 @@
         <button type='button' class='border-white border-2 p-4 rounded-xl w-1/3 font-bold' on:click={handleSubmit}>Log in</button>
       </div>
     </form>
-    <!-- SIGN UP FLOW -->
+  </div>
+  <div class="mt-6 text-center">
+    <h3>New user? Sign up <a href="#/signup">here</a></h3>
   </div>
 </div>
