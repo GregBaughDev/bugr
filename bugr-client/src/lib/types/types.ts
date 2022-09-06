@@ -26,19 +26,36 @@ export enum NavLinks {
     { link: NavLinks.Search, route: '/search', auth: true },
   ]
 
-  enum UserType {
-    Seeking,
-    Offering,
-    Carer
-  }
-  
+  export const UserType = {
+    Seeking: "Seeking bug",
+    Offering: "Offering bug",
+    Carer: "Carer of bug"
+  } as const
+
+  type UserTypeProps = typeof UserType
+  type UserTypeValues = UserTypeProps[keyof UserTypeProps]
+
+  export const States = {
+    VIC: "VIC",
+    NSW: "NSW",
+    QLD: "QLD",
+    SA: "SA",
+    WA: "WA",
+    NT: "NT",
+    ACT: "ACT",
+    TAS: "TAS"
+  } as const
+
+  type StatesProps = typeof States
+  export type StatesValues = StatesProps[keyof StatesProps]
+
   export interface User {
     userId: string
     username: string
     email: string
     location: string
     state: string
-    userType: UserType
+    userType: UserTypeValues
     aboutBug: string
     confirmed: boolean
   }
