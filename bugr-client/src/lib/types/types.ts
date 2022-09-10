@@ -27,9 +27,9 @@ export enum NavLinks {
   ]
 
   export const UserType = {
-    Seeking: "Seeking bug",
-    Offering: "Offering bug",
-    Carer: "Carer of bug"
+    SEEKING: "Seeking bug",
+    OFFERING: "Offering bug",
+    CARER: "Carer of bug"
   } as const
 
   type UserTypeProps = typeof UserType
@@ -50,12 +50,13 @@ export enum NavLinks {
   export type StatesValues = StatesProps[keyof StatesProps]
 
   export interface User {
-    userId: string
+    userId?: string
+    password?: string
     username: string
     email: string
     location: string
-    state: string
+    state: StatesProps
     userType: UserTypeValues
     aboutBug: string
-    confirmed: boolean
+    confirmed?: boolean
   }
