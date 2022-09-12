@@ -32,6 +32,6 @@
     </form>
   </div>
   <div class="mt-6 text-center">
-    <h3>New user? Sign up <a href="#/signup">here</a></h3>
+    <h3>New user? Sign up <a href="#/signup" class="underline">here</a></h3>
   </div>
 </div>
