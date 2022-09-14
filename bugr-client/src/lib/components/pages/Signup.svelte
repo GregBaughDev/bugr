@@ -58,7 +58,7 @@
       <textarea id="about" name="about" class="w-2/3 resize-none p-2 border-[#240465] border-2" bind:value={newUserForm.aboutBug}></textarea>
     </div>
     <div class="mt-4 flex items-center justify-center w-full">
-      <button type="button" class="border-2 p-4 rounded-xl w-1/3 font-bold border-[#240465] text-[#240465]" on:click={handleSubmit}>Sign up!</button>
+      <button type="button" class="border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]" on:click={handleSubmit}>Sign up!</button>
     </div>
   </form>
 </div>

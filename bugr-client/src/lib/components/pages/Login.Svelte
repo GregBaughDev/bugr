@@ -27,7 +27,7 @@
         <input type='password' name='password' id='password' class='p-2 w-2/3 border-[#240465] border-2' bind:value={userInfo.password}>
       </div>
       <div class='flex items-center justify-center w-full'>
-        <button type='button' class='border-2 p-4 rounded-xl w-1/3 font-bold border-[#240465] text-[#240465]' on:click={handleSubmit}>Log in</button>
+        <button type='button' class='border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]' on:click={handleSubmit}>Log in</button>
       </div>
     </form>
   </div>
