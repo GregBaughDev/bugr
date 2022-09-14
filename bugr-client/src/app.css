@@ -3,15 +3,17 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    color: #240465;  
-  }
-
   h3 {
     font-size: 15px;
+    color: #240465;
   }
 
   h2 {
     font-size: 20px;
+    color: #240465;
+  }
+
+  p, a {
+    color: #240465;
   }
 }

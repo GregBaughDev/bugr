@@ -5,9 +5,9 @@
   import Nav from './lib/components/Nav.svelte';  
 </script>
 
-<main class="bg-background h-screen w-screen">
+<main class="h-screen w-screen">
   <div class="p-5">
-    <h1 class="font-serif font-bold text-primary italic text-center text-6xl">bugr</h1>
+    <h1 class="font-bold text-primary italic text-center text-6xl">bugr</h1>
     <div class="flex flex-row">
       <Nav />
       <Router {routes} />
