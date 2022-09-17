@@ -2,14 +2,17 @@ import { push } from "svelte-spa-router"
 import { ApiRoutesUsers } from "./types"
 import { userDetails } from "../lib/state/userStore"
 import { userLoggedIn } from "../lib/state/globalStore"
+import { logInError, logInErrorMessage } from "../lib/state/formStore"
 
 export const userLogin = async (data): Promise<void> => {
+  logInError.set(false)
+  logInErrorMessage.set('')
   try {
     const loginCall = await fetch(`${ApiRoutesUsers.BASE}${ApiRoutesUsers.LOGIN}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
     const result = await loginCall.json()
     if (result.status === 400) {
-      console.log('incorrect credentials')
-      // USE A VARIABLE IN THE STORE TO SET THE ERROR AND DISPLAY WHERE REQUIRED
+      logInError.set(true)
+      logInErrorMessage.set(result.message)
     } else {
       userDetails.set(result)
       userLoggedIn.set(true)
