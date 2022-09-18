@@ -2,7 +2,7 @@
   import Router, { push } from 'svelte-spa-router'
   import { routes } from './routes'
   import './app.css'
-  import Nav from './lib/components/Nav.svelte';  
+  import Nav from './lib/components/Nav.svelte'
 </script>
 
 <main class="h-screen w-screen">
