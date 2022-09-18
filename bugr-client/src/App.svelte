@@ -5,11 +5,13 @@
   import Nav from './lib/components/Nav.svelte'
 </script>
 
-<main class="h-screen w-screen">
+<main class="h-screen w-screen cursor-vertical-text">
   <div class="p-5">
-    <h1 class="font-bold text-primary italic text-6xl">bugr</h1>
-    <div class="flex flex-row">
+    <div class="flex flex-row justify-between items-center">
+      <h1 class="font-bold text-primary italic text-[100px]">bugr</h1>
       <Nav />
+    </div>
+    <div class="flex justify-center">
       <Router {routes} />
     </div>
   </div>

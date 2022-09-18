@@ -21,9 +21,9 @@ export enum NavLinks {
     { link: NavLinks.Logout, route: '/logout', auth: true },
     { link: NavLinks.About, route: '/about', auth: false },
     { link: NavLinks.Rules, route: '/rules', auth: false },
-    { link: NavLinks.Messages, route: '/messages', auth: true },
     { link: NavLinks.Profile, route: '/profile', auth: true },
     { link: NavLinks.Search, route: '/search', auth: true },
+    { link: NavLinks.Messages, route: '/messages', auth: true },
   ]
 
   export const UserType = {

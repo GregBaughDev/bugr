@@ -8,11 +8,11 @@
   }
 </script>
 <!-- LOOK INTO PREVENT DEFAULT ON REFRESH -->
-<div class="mr-10">
-  <nav class="flex flex-col w-2/12">
+<div class="my-10">
+  <nav class="flex flex-row w-2/12">
     {#key $userLoggedIn}
       {#each filterNavItems(navItems) as nav }
-        <a href={`/#${nav.route}`}>{nav.link}</a>
+        <a class='-rotate-90' href={`/#${nav.route}`}>{nav.link}</a>
       {/each}
     {/key}
   </nav>
