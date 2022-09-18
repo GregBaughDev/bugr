@@ -7,7 +7,7 @@
 
 <main class="h-screen w-screen">
   <div class="p-5">
-    <h1 class="font-bold text-primary italic text-center text-6xl">bugr</h1>
+    <h1 class="font-bold text-primary italic text-6xl">bugr</h1>
     <div class="flex flex-row">
       <Nav />
       <Router {routes} />
