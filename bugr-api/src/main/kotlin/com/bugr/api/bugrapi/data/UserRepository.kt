@@ -12,10 +12,16 @@ import javax.transaction.Transactional
 interface UserRepository : JpaRepository<Users, Int> {
 
     @Query(
-        value = "SELECT user_id as userId, username, user_password as password, email, location, state, user_type as userType, about_bug as aboutBug, is_confirmed as confirmed FROM users WHERE username = :username",
+        value = "SELECT user_id as userId, username, email, location, state, user_type as userType, about_bug as aboutBug, is_confirmed as confirmed FROM users WHERE username = :username",
         nativeQuery = true
     )
     fun userLogin(username: String): LoggedInUser?
+
+    @Query(
+        value = "SELECT user_password FROM users WHERE username = :username",
+        nativeQuery = true
+    )
+    fun checkPassword(username: String): String?
 
     @Query(
         value = "SELECT COUNT(users) FROM users WHERE username = :username",
