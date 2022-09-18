@@ -25,14 +25,13 @@ class UserService(private val userRepository: UserRepository) {
     fun userLogin(username: String, password: String): LoggedInUser? {
         if (username.isEmpty() || password.isEmpty()) throw InvalidInputException()
 
-        var userResult: LoggedInUser? = userRepository.userLogin(username)
+        var passwordCheck: String? = userRepository.checkPassword(username)
 
-        if (userResult == null || !BCrypt.checkpw(password, userResult.password)) {
+        if (passwordCheck == null || !BCrypt.checkpw(password, passwordCheck)) {
             throw UserException(UserExceptionResponse.INCORRECT_CREDENTIALS.responseToString())
         }
-        // TO DO -> REMOVING PASSWORD FROM OBJECT -> LOOK INTO A BETTER WAY THAN BELOW
-        userResult.password = ""
-        return userResult
+
+        return userRepository.userLogin(username)
     }
 
     fun newUser(newUser: Users): Users {
