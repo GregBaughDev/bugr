@@ -3,6 +3,7 @@
   import type { User } from '../../types/types'
   import { newUser } from '../../../api/users'
   
+  let isSignUpDisabled: boolean = true
   const newUserForm: User = {
     username: '',
     password: '',
@@ -12,7 +13,7 @@
     userType: undefined,
     aboutBug: ''
   }
-
+ 
   const handleSubmit = (): void => {
     newUser({ ...newUserForm })
   }
@@ -23,19 +24,19 @@
   <form class="flex flex-col w-full items-center mt-8">
     <div class="mt-4 flex justify-between w-full items-center">
       <label for="username">Enter a username:</label>
-      <input type="text" name="username" id="username" class="w-2/3 p-2 border-[#240465] border-2" bind:value={newUserForm.username}>
+      <input type="text" name="username" id="username" class="w-2/3 p-2 border-[#240465] border-2" placeholder="required" bind:value={newUserForm.username}>
     </div>
     <div class="mt-2 flex justify-between w-full items-center">
       <label for="password">Enter a password:</label>
-      <input type="password" name="password" id="password" class="w-2/3 p-2 border-[#240465] border-2" bind:value={newUserForm.password}>
+      <input type="password" name="password" id="password" class="w-2/3 p-2 border-[#240465] border-2" placeholder="required" bind:value={newUserForm.password}>
     </div>
     <div class="mt-2 flex justify-between w-full items-center">
       <label for="email">Enter your email:</label>
-      <input type="email" name="email" id="email" class="w-2/3 p-2 border-[#240465] border-2" bind:value={newUserForm.email}>
+      <input type="email" name="email" id="email" class="w-2/3 p-2 border-[#240465] border-2" placeholder="required" bind:value={newUserForm.email}>
     </div>
     <div class="mt-2 flex justify-between w-full items-center">
       <label for="location">Enter your location:</label>
-      <input type="text" name="location" id="location" class="w-2/3 p-2 border-[#240465] border-2" bind:value={newUserForm.location}>
+      <input type="text" name="location" id="location" class="w-2/3 p-2 border-[#240465] border-2" placeholder="required" bind:value={newUserForm.location}>
     </div>
     <div class="mt-2 flex justify-between w-full items-center">
       <label for="state">Select your state:</label>
@@ -55,10 +56,10 @@
     </div>
     <div class="mt-2 flex justify-between w-full items-center">
       <label for="about">About:</label>
-      <textarea id="about" name="about" class="w-2/3 resize-none p-2 border-[#240465] border-2" bind:value={newUserForm.aboutBug}></textarea>
+      <textarea id="about" name="about" class="w-2/3 resize-none p-2 border-[#240465] border-2" placeholder="required" bind:value={newUserForm.aboutBug}></textarea>
     </div>
     <div class="mt-4 flex items-center justify-center w-full">
-      <button type="button" class="border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]" on:click={handleSubmit}>Sign up!</button>
+      <button type="button" class="border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]" disabled={isSignUpDisabled} on:click={handleSubmit}>Sign up</button>
     </div>
   </form>
 </div>
