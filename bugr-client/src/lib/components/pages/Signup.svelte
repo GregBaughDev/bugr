@@ -9,16 +9,19 @@
     password: '',
     email: '',
     location: '',
-    state: undefined,
-    userType: undefined,
+    state: States[0],
+    userType: UserType[0],
     aboutBug: ''
   }
  
   const handleSubmit = (): void => {
     newUser({ ...newUserForm })
   }
+
+  $: Object.values(newUserForm).some((item) => item === '') ? isSignUpDisabled = true : isSignUpDisabled = false
+
 </script>
-<!-- TODO: ADD REQUIRED FIELDS CHECKS -->
+<!-- HANDLE API ERROR MESSAGES -->
 <div class="w-10/12 p-4">
   <h2>Sign up</h2>
   <form class="flex flex-col w-full items-center mt-8">
@@ -59,7 +62,7 @@
       <textarea id="about" name="about" class="w-2/3 resize-none p-2 border-[#240465] border-2" placeholder="required" bind:value={newUserForm.aboutBug}></textarea>
     </div>
     <div class="mt-4 flex items-center justify-center w-full">
-      <button type="button" class="border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]" disabled={isSignUpDisabled} on:click={handleSubmit}>Sign up</button>
+      <button type="button" class="border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]" disabled={isSignUpDisabled} on:click={handleSubmit}>Sign up<br/>Is the button active -> {!isSignUpDisabled}</button>
     </div>
   </form>
 </div>
