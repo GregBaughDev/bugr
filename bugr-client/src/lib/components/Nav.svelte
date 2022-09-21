@@ -12,7 +12,7 @@
   <nav class="flex flex-row w-2/12">
     {#key $userLoggedIn}
       {#each filterNavItems(navItems) as nav }
-        <a class='-rotate-90' href={`/#${nav.route}`}>{nav.link}</a>
+        <a class='-rotate-90 text-xl' href={`/#${nav.route}`}>{nav.link}</a>
       {/each}
     {/key}
   </nav>
