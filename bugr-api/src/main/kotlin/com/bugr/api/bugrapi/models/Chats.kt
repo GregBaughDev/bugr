@@ -12,5 +12,7 @@ data class Chats (
     @Column(name = "FROM_USER")
     val fromUser: Int,
     @Column(name = "TO_USER")
-    val toUser: Int
+    val toUser: Int,
+    @Column(name = "USERNAME")
+    val fromUsername: String?
     )

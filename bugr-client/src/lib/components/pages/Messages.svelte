@@ -3,6 +3,24 @@
   // Open websocket and grab all the messages
   // If opened -> post to db
   // Add opened field to messages table
+  // Display ability to respond to message
+  
+  // MSG RESPONSE EXAMPLE:
+  // messages = [
+  //   {
+  //     fromUsername: 'name',
+  //     chatId: 1
+  //     messages: [
+  //        {
+  //              message: "test message",
+  //              timeStamp: 'testtime'
+  //              ALL ORDERED FROM LATE TO EARLIEST
+  //        }
+  //      ]
+  // }
+  // ]
+
+  // API -> Need to 
 </script>
 
 <div class="w-10/12 p-4 h-full">
@@ -14,7 +32,7 @@
       <div class="p-2 w-3/5">Message</div>
     </div>
     <!-- loop through the messages and display here -->
-    <div class="w-full border-b-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]">
+    <div class="w-full border-b-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]" on:click={(e) => console.log(e)}>
       <div class="p-2 w-1/5">TestUser</div>
       <div class="p-2 w-1/5">23.09.21</div>
       <div class="p-2 w-3/5">Hi there! I'd love to look after your bug</div>

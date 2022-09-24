@@ -10,7 +10,7 @@ import java.util.Optional
 interface ChatRepository : JpaRepository<Chats, Int> {
 
     @Query(
-        value = "SELECT * FROM chats WHERE to_user = :id",
+        value = "SELECT chats.*, users.username FROM chats INNER JOIN users ON chats.from_user = users.user_id WHERE to_user = :id",
         nativeQuery = true
     )
     fun getAllChatsForUser(id: Int): Optional<Chats>

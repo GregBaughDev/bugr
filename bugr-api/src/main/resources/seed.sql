@@ -37,3 +37,21 @@ VALUES
 (3, 'Thanks again for the starter'),
 (3, 'No problem! Enjoy :)'),
 (4, 'Thanks for doing a great job caring for my bug')
+
+INSERT INTO messages2 (chat_id, from_user, to_user, message)
+VALUES
+(1, 1, 2, 'Hi there!'),
+(1, 2, 1, 'Hey! How is it going?'),
+(1, 1, 2, 'Good thanks, n u?'),
+(1, 2, 1, 'Fine thanks!'),
+(2, 1, 3, 'test 2'),
+(2, 3, 1, 'reply 2'),
+(2, 1, 3, 'test 2a'),
+(2, 3, 1, 'reply 2a')
+
+INSERT INTO messages2 (chat_id, from_user, to_user, message)
+VALUES
+(1, 1, 2, 'Great to hear :)'),
+(1, 2, 1, 'Thanks'),
+(1, 2, 1, 'neway did you want to look after my bug'),
+(1, 1, 2, 'yeah sure')

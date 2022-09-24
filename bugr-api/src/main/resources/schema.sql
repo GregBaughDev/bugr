@@ -49,3 +49,12 @@ CREATE TABLE messages (
     CONSTRAINT messages_chatid_fkey FOREIGN KEY (chat_id) REFERENCES chats(chat_id)
     ON DELETE CASCADE
 );
+
+CREATE TABLE messages2 (
+    message_id SERIAL PRIMARY KEY,
+    chat_id INT NOT NULL,
+    from_user INT NOT NULL,
+    to_user INT NOT NULL,
+    message VARCHAR(1000) NOT NULL,
+    message_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
