@@ -25,7 +25,7 @@ class UserService(private val userRepository: UserRepository) {
     fun userLogin(username: String, password: String): LoggedInUser? {
         if (username.isEmpty() || password.isEmpty()) throw InvalidInputException()
 
-        var passwordCheck: String? = userRepository.checkPassword(username)
+        val passwordCheck: String? = userRepository.checkPassword(username)
 
         if (passwordCheck == null || !BCrypt.checkpw(password, passwordCheck)) {
             throw UserException(UserExceptionResponse.INCORRECT_CREDENTIALS.responseToString())

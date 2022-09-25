@@ -1,5 +1,9 @@
 package com.bugr.api.bugrapi.models
 
+import com.vladmihalcea.hibernate.type.array.IntArrayType
+import org.hibernate.annotations.Type
+import org.hibernate.annotations.TypeDef
+import org.hibernate.annotations.TypeDefs
 import javax.persistence.*
 
 enum class UserType {
@@ -10,6 +14,7 @@ enum class State {
     VIC, NSW, QLD, SA, WA, NT, TAS, ACT
 }
 
+@TypeDefs(TypeDef(name = "int-array", typeClass = IntArrayType::class))
 @Entity
 @Table(name = "USERS")
 data class Users (
@@ -35,4 +40,7 @@ data class Users (
     val aboutBug: String,
     @Column(name = "IS_CONFIRMED")
     val isConfirmed: Boolean,
+    @Type(type = "int-array")
+    @Column(name = "CHATS")
+    val chats: Array<Int> = emptyArray()
     )

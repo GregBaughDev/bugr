@@ -11,6 +11,14 @@ data class Messages (
     val messageId: Int,
     @Column(name = "CHAT_ID")
     val chatId: Int,
+    @Column(name = "FROM_USER")
+    val fromUser: Int,
+    @Column(name = "TO_USER")
+    val toUser: Int,
     @Column(name = "MESSAGE")
-    val message: String
+    val message: String,
+    @Column(name = "MESSAGE_DATE")
+    val messageDate: String,
+    @Column(name = "USERNAME")
+    val username: String
     )
