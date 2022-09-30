@@ -40,7 +40,7 @@ data class Users (
     val aboutBug: String,
     @Column(name = "IS_CONFIRMED")
     val isConfirmed: Boolean,
-    @Type(type = "int-array")
+//    @Type(type = "int-array")
     @Column(name = "CHATS")
-    val chats: Array<Int> = emptyArray()
+    val chats: String = ""
     )

@@ -16,11 +16,13 @@ class MessageService(private val messageRepository: MessageRepository) {
         // RESHAPE INTO NEW FORMAT
         var userChats: List<Messages> = emptyList()
         var userMessages: List<UserChats> = emptyList()
-        val userChatsArray: Array<Int> = messageRepository.getUserChats(userId)
-
+        val userChatsString: String = messageRepository.getUserChats(userId)
+        val userChatsArray: List<String> = userChatsString.split(',')
+        // REMOVE CUSTOM TYPES AS NOT REQUIRED // SHRUG
+        // SORT OUT THE SHAPE OF THE OBJECT
         if (userChatsArray.isNotEmpty()) {
             for (chat in userChatsArray) {
-                userChats = messageRepository.getAllChatMessages(chat)
+                userChats = messageRepository.getAllChatMessages(chat.toInt())
             }
             userMessages = userChats.map { mapToChats(it) }
         }
