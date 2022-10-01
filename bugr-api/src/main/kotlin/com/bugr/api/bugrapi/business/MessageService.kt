@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class MessageService(private val messageRepository: MessageRepository) {
 
     fun getMessages(userId: Int): MutableList<List<Messages>> {
-        var userChats: MutableList<List<Messages>> = arrayListOf()
+        val userChats: MutableList<List<Messages>> = arrayListOf()
         val userChatsString: String = messageRepository.getUserChats(userId)
         val userChatsArray: List<String> = userChatsString.split(',')
 
