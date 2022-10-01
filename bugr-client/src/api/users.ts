@@ -1,5 +1,5 @@
 import { push } from "svelte-spa-router"
-import { ApiRoutesUsers } from "./types"
+import { ApiRoutes } from "./types"
 import { userDetails } from "../lib/state/userStore"
 import { userLoggedIn } from "../lib/state/globalStore"
 import { logInError, logInErrorMessage } from "../lib/state/formStore"
@@ -8,7 +8,7 @@ export const userLogin = async (data): Promise<void> => {
   logInError.set(false)
   logInErrorMessage.set('')
   try {
-    const loginCall = await fetch(`${ApiRoutesUsers.BASE}${ApiRoutesUsers.LOGIN}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
+    const loginCall = await fetch(`${ApiRoutes.BASE}${ApiRoutes.USERS.LOGIN}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
     const result = await loginCall.json()
     if (result.status === 400) {
       logInError.set(true)
@@ -25,7 +25,7 @@ export const userLogin = async (data): Promise<void> => {
 
 export const newUser = async (data): Promise<void> => {
   try {
-    const newUserCall = await fetch(`${ApiRoutesUsers.BASE}${ApiRoutesUsers.NEW_USER}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
+    const newUserCall = await fetch(`${ApiRoutes.BASE}${ApiRoutes.USERS.NEW_USER}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
     const result = await newUserCall.json()
     if (result.status === 400){
       console.log(result.message)

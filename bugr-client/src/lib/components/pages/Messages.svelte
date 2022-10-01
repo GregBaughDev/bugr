@@ -1,26 +1,14 @@
 <script lang="ts">
-  // Design for messages
+  import { getUserMessages } from "../../../api/messages"
+  import { userDetails } from "../../state/userStore"
+
   // Open websocket and grab all the messages
   // If opened -> post to db
   // Add opened field to messages table
   // Display ability to respond to message
-  
-  // MSG RESPONSE EXAMPLE:
-  // messages = [
-  //   {
-  //     fromUsername: 'name',
-  //     chatId: 1
-  //     messages: [
-  //        {
-  //              message: "test message",
-  //              timeStamp: 'testtime'
-  //              ALL ORDERED FROM LATE TO EARLIEST
-  //        }
-  //      ]
-  // }
-  // ]
-
-  // API -> Need to 
+  // 
+  // const messages = getUserMessages($userDetails.userId)
+  const messages = getUserMessages(1)
 </script>
 
 <div class="w-10/12 p-4 h-full">
