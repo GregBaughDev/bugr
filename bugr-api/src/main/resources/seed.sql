@@ -69,3 +69,19 @@ VALUES
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
 (1, 1, 2, 'yeah sure')
+
+INSERT INTO messages (chat_id, from_user, to_user, message)
+VALUES
+(3, 1, 3, 'test 3')
+
+INSERT INTO messages (chat_id, from_user, to_user, message)
+VALUES
+(3, 3, 1, 'reply 3')
+
+INSERT INTO messages (chat_id, from_user, to_user, message)
+VALUES
+(3, 1, 3, 'test 3a')
+
+INSERT INTO messages (chat_id, from_user, to_user, message)
+VALUES
+(3, 3, 1, 'reply 3a')
