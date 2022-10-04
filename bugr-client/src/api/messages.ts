@@ -1,12 +1,12 @@
 import { ApiRoutes } from "./types"
 import type { GetMessages } from "./types"
+import { userMessages } from "../lib/state/globalStore"
 
-export const getUserMessages = async (userId): Promise<GetMessages[]> => {
+export const getUserMessages = async (userId): Promise<void> => {
   try {
     const getMessages = await fetch(`${ApiRoutes.BASE}${ApiRoutes.MESSAGES.GET_MESSAGES}${userId}`, { method: 'GET', headers: { 'Content-Type': 'application/json' }, mode: 'cors' })
-    const result = await getMessages.json()
-    console.log(result)
-    return result
+    const result: GetMessages[] = await getMessages.json()
+    return userMessages.set(result)
   } catch (e) {
     console.error(e)
   }
