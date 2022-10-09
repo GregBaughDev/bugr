@@ -7,7 +7,8 @@ export const ApiRoutes = {
     NEW_USER: '/users/new',
   },
   MESSAGES: {
-    GET_MESSAGES: '/messages?userId='
+    GET_MESSAGES: '/messages?userId=',
+    POST_MESSAGE: '/messages'
   }
 } as const
 
@@ -33,3 +34,13 @@ export interface GetMessages {
   messageDate: string
   username: string
 }
+
+export interface PostMessage {
+  body: {
+    chatId: string
+    fromUser: string
+    toUser: string
+    message: string
+  }
+}
+

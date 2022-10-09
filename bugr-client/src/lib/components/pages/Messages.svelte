@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { getUserMessages } from "../../../api/messages"
+  import { getUserMessages, sendUserMessage } from "../../../api/messages"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
 
-  // Open websocket and grab all the messages
+  // Open websocket to check for new messages
   // If opened and new message -> post to db -> need value to check if it has been opened and display NEW next to the message
   // Add opened field to messages table
   // Display ability to respond to message
@@ -17,6 +17,7 @@
   })
 
   let openMessage: number
+  let toUser: number
   let replyAreaActive: boolean
   let replyMessage: string
 
@@ -25,10 +26,13 @@
   }
   const toggleReplyArea = (): boolean => replyAreaActive = !replyAreaActive
   const handleReplySubmit = (messageId: number): void => {
-    console.log(messageId + "-> response for message")
-    console.log({ replyMessage })
-    // Submit to DB
     // Refetch messages
+    sendUserMessage({
+      chatId: messageId.toString(),
+      fromUser: $userDetails.userId,
+      toUser: toUser.toString(),
+      message: replyMessage
+    })
   }
   const handleMessageSwitchOrClose = (): void => {
     replyAreaActive = false
@@ -56,7 +60,7 @@
           {#if openMessage === chat[0].chatId}
             <div class="flex flex-row w-1/2 justify-between">
               <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer font-bold" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
-              <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer text-right font-bold" on:click={() => toggleReplyArea()}>Reply</div>
+              <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer text-right font-bold" on:click={() => {toggleReplyArea(); toUser = chat[0].toUser}}>Reply</div>
             </div>
           {/if}
           {#each chat as message}

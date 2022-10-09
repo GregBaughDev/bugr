@@ -39,7 +39,7 @@
         <input type='password' name='password' id='password' class='p-2 w-2/3 border-[#240465] border-2' bind:value={userInfo.password}>
       </div>
       <div class='flex items-center justify-center w-full'>
-        <button type='button' class={'bg-slate-700 border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]'} on:click={handleSubmit} disabled={isSubmitDisabled}>Log in<br/>Is the button active -> {!isSubmitDisabled}</button>
+        <button type='button' class='bg-slate-700 border-2 p-4 w-1/3 font-bold border-[#240465] text-[#240465]' on:click={handleSubmit} disabled={isSubmitDisabled}>Log in<br/>Is the button active -> {!isSubmitDisabled}</button>
       </div>
     </form>
   </div>
