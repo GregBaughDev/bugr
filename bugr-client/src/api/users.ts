@@ -8,7 +8,17 @@ export const userLogin = async (data): Promise<void> => {
   logInError.set(false)
   logInErrorMessage.set('')
   try {
-    const loginCall = await fetch(`${ApiRoutes.BASE}${ApiRoutes.USERS.LOGIN}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
+    const loginCall = await fetch(
+      `${ApiRoutes.BASE}${ApiRoutes.USERS.LOGIN}`, 
+      { 
+        method: 'POST', 
+        headers: { 
+          'Content-Type': 'application/json' 
+        }, 
+        mode: 'cors', 
+        body: JSON.stringify(data) 
+      }
+    )
     const result = await loginCall.json()
     if (result.status === 400) {
       logInError.set(true)
@@ -25,7 +35,17 @@ export const userLogin = async (data): Promise<void> => {
 
 export const newUser = async (data): Promise<void> => {
   try {
-    const newUserCall = await fetch(`${ApiRoutes.BASE}${ApiRoutes.USERS.NEW_USER}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, mode: 'cors', body: JSON.stringify(data) })
+    const newUserCall = await fetch(
+      `${ApiRoutes.BASE}${ApiRoutes.USERS.NEW_USER}`, 
+      { 
+        method: 'POST', 
+        headers: { 
+          'Content-Type': 'application/json' 
+        }, 
+        mode: 'cors', 
+        body: JSON.stringify(data) 
+      }
+    )
     const result = await newUserCall.json()
     if (result.status === 400){
       console.log(result.message)
