@@ -26,13 +26,14 @@
   }
   const toggleReplyArea = (): boolean => replyAreaActive = !replyAreaActive
   const handleReplySubmit = (messageId: number): void => {
-    // Refetch messages
     sendUserMessage({
       chatId: messageId.toString(),
       fromUser: $userDetails.userId,
       toUser: toUser.toString(),
       message: replyMessage
     })
+    // Refetch messages not working
+    getUserMessages($userDetails.userId)
   }
   const handleMessageSwitchOrClose = (): void => {
     replyAreaActive = false
@@ -50,8 +51,8 @@
     </div>
     {#each $userMessages as chat}
       <div class="w-full border-t-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]" on:click={() => {currentMessage(chat[0].chatId); handleMessageSwitchOrClose()}}>
-        <div class="p-2 w-1/5">{chat[0].fromUser === $userDetails.userId ? "You" : chat[0].fromUser}</div>
-        <div class="p-2 w-1/5">{new Date(chat[0].messageDate.substring(0, 10)).toLocaleDateString('en-AU')}</div>
+        <div class="p-2 w-1/5">{chat[chat.length - 1].fromUser === $userDetails.userId ? "You" : chat[0].fromUser}</div>
+        <div class="p-2 w-1/5">{new Date(chat[chat.length - 1].messageDate.substring(0, 10)).toLocaleDateString('en-AU')}</div>
         <!-- display latest message below -->
         <div class="p-2 w-1/5">{chat[chat.length - 1].message}</div>
       </div> 
