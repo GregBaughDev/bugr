@@ -9,8 +9,9 @@ import Messages from './lib/components/pages/Messages.svelte'
 import Profile from './lib/components/pages/Profile.svelte'
 import Rules from './lib/components/pages/Rules.svelte'
 import Search from './lib/components/pages/Search.svelte'
-import Signup from './lib/components/pages/Signup.svelte';
-import Fallback from './lib/components/pages/Fallback.svelte';
+import Signup from './lib/components/pages/Signup.svelte'
+import UserView from './lib/components/pages/UserView.svelte'
+import Fallback from './lib/components/pages/Fallback.svelte'
 import { userLoggedIn } from '../src/lib/state/globalStore'
 
 const checkUserAuthOrRedirect = (loggedIn: boolean): boolean => {
@@ -51,5 +52,11 @@ export const routes = {
       ]
     }),
     '/signup': Signup,
+    '/userView/:id': wrap({
+      component: UserView,
+      conditions: [
+        () => checkUserAuthOrRedirect(get(userLoggedIn))
+      ]
+    }),
     '*': Fallback
   }
