@@ -2,8 +2,10 @@ package com.bugr.api.bugrapi.data
 
 import com.bugr.api.bugrapi.models.Messages
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
+import org.springframework.transaction.annotation.Transactional
 
 @Repository
 interface MessageRepository : JpaRepository<Messages, Int> {
@@ -19,5 +21,13 @@ interface MessageRepository : JpaRepository<Messages, Int> {
         nativeQuery = true
     )
     fun getAllChatMessages(chatId: Int): List<Messages>
+
+    @Transactional
+    @Modifying
+    @Query(
+        value = "INSERT INTO messages (chat_id, from_user, to_user, message) VALUES (:chatId, :fromUser, :toUser, :message)",
+        nativeQuery = true
+    )
+    fun saveUserMessage(chatId: Int, fromUser: Int, toUser: Int, message: String): Unit
 
 }
