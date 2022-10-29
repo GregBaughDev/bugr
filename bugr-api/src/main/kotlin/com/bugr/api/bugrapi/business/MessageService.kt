@@ -12,19 +12,14 @@ class MessageService(private val messageRepository: MessageRepository) {
         val userChats: MutableList<List<Messages>> = arrayListOf()
         val userChatsString: String = messageRepository.getUserChats(userId)
         val userChatsArray: List<String> = userChatsString.split(',')
-
         if (userChatsArray[0].isNotEmpty()) {
-            for (chat in userChatsArray) {
-                userChats.add(messageRepository.getAllChatMessages(chat.toInt()))
-            }
+            userChatsArray.forEach() { userChats.add(messageRepository.getAllChatMessages(it.toInt())) }
         }
         return userChats
     }
 
-    fun postMessage(message: Messages): Messages {
+    fun postMessage(message: Messages): Unit {
         if (message.message.isEmpty()) throw InvalidInputException()
-
-        return messageRepository.save(message)
+        return messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
     }
-
 }
