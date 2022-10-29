@@ -34,8 +34,9 @@ export const sendUserMessage = async (data: PostMessage): Promise<void> => {
         body: JSON.stringify(data) 
       }
     )
-    const result = await postMessage.json()
-    console.log({ result })
+    if (postMessage.status === 201) {
+      // Set a global to alert user
+    }
   } catch (e) {
     console.error({e})
   }

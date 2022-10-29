@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte"
+  import { afterUpdate, onMount } from "svelte"
   import { getUserMessages, sendUserMessage } from "../../../api/messages"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
@@ -16,6 +16,10 @@
     }
   })
 
+  afterUpdate(async () => {
+    await getUserMessages($userDetails.userId)
+  })
+
   let openMessage: number
   let toUser: number
   let replyAreaActive: boolean
@@ -25,15 +29,13 @@
     openMessage = messageId
   }
   const toggleReplyArea = (): boolean => replyAreaActive = !replyAreaActive
-  const handleReplySubmit = (messageId: number): void => {
-    sendUserMessage({
+  const handleReplySubmit = async (messageId: number): Promise<void> => {
+    await sendUserMessage({
       chatId: messageId.toString(),
       fromUser: $userDetails.userId,
       toUser: toUser.toString(),
       message: replyMessage
     })
-    // Refetch messages not working
-    getUserMessages($userDetails.userId)
   }
   const handleMessageSwitchOrClose = (): void => {
     replyAreaActive = false
