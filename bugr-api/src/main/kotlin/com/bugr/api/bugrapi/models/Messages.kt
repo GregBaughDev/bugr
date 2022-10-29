@@ -1,5 +1,6 @@
 package com.bugr.api.bugrapi.models
 
+import com.sun.istack.Nullable
 import javax.persistence.*
 
 @Entity
@@ -18,7 +19,6 @@ data class Messages (
     @Column(name = "MESSAGE")
     val message: String,
     @Column(name = "MESSAGE_DATE")
-    val messageDate: String,
-    @JoinColumn(name="USERNAME")
-    val username: String
+    val messageDate: String?,
+    val username: String?
     )
