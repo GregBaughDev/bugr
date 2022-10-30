@@ -25,4 +25,10 @@ class MessageController(private val messageService: MessageService) {
         return messageService.postMessage(message)
     }
 
+    @PutMapping("/messages", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus(HttpStatus.OK)
+    fun updateMessageOpened(@RequestBody messageId: Int): Unit {
+        return messageService.updateMessageOpened(messageId)
+    }
+
 }

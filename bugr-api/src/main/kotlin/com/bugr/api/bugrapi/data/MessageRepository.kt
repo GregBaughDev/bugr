@@ -30,4 +30,10 @@ interface MessageRepository : JpaRepository<Messages, Int> {
     )
     fun saveUserMessage(chatId: Int, fromUser: Int, toUser: Int, message: String): Unit
 
+    @Modifying
+    @Query(
+        value = "UPDATE messages SET opened = 1 WHERE message_id = :messageId",
+        nativeQuery = true
+    )
+    fun updateMessageOpened(messageId: Int)
 }

@@ -22,4 +22,8 @@ class MessageService(private val messageRepository: MessageRepository) {
         if (message.message.isEmpty()) throw InvalidInputException()
         return messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
     }
+
+    fun updateMessageOpened(messageId: Int): Unit {
+        return messageRepository.updateMessageOpened(messageId)
+    }
 }
