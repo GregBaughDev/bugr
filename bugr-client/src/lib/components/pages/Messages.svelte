@@ -3,13 +3,13 @@
   import { getUserMessages, sendUserMessage } from "../../../api/messages"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
+  import { clsx } from 'clsx' 
 
   // Open websocket to check for new messages
   // If opened and new message -> post to db -> need value to check if it has been opened and display NEW next to the message
   // Add opened field to messages table
-  // Display ability to respond to message
-  // Refresh on send
   // Cache the messages
+  // DELETE MESSAGE FUNCTIONALITY TOO
   onMount(async () => {
     if ($userMessages.length == 0) {
       await getUserMessages($userDetails.userId)
@@ -59,15 +59,15 @@
         <div class="p-2 w-1/5">{chat[chat.length - 1].message}</div>
       </div> 
       {#if openMessage !== undefined && openMessage === chat[0].chatId}
-        <div class="w-full flex flex-col p-2 justify-center">
-          {#if openMessage === chat[0].chatId}
-            <div class="flex flex-row w-1/2 justify-between">
-              <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer font-bold" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
-              <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer text-right font-bold" on:click={() => {toggleReplyArea(); toUser = chat[0].toUser}}>Reply</div>
-            </div>
-          {/if}
+        {#if openMessage === chat[0].chatId}
+          <div class="flex flex-row p-2 w-1/2 justify-between">
+            <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer font-bold" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
+            <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer text-right font-bold" on:click={() => {toggleReplyArea(); toUser = chat[0].toUser}}>Reply</div>
+          </div>
+        {/if}
+        <div class="w-full flex flex-col p-2 max-h-[400px] overflow-scroll">
           {#each chat as message}
-            <div class="flex flex-row justify-between w-1/2 h-10">
+            <div class={clsx("flex flex-row justify-between w-1/2 py-1 h-10", message.fromUser === $userDetails.userId && 'bg-[#e0e0e2]')}>
               <div>{message.message}</div>
               <div>{message.username}</div>
             </div>
