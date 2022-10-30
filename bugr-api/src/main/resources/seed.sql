@@ -1,4 +1,4 @@
-INSERT INTO users (username, user_password, email, location, state, user_type, about_bug, is_confirmed)
+INSERT INTO users (username, user_password, email, location, state, user_type, about_bug, is_confirmed, chats)
 VALUES
 ('test1', 'test1', 'test1@email.com', 'Melbourne', 'VIC', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
 ('test2', 'test2', 'test2@email.com', 'Sydney', 'NSW', 'OFFERING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
@@ -24,64 +24,64 @@ VALUES
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 1, 2, 'Hi there!')
+(1, 8, 2, 'Hi there!');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 2, 1, 'Hey! How is it going?')
+(1, 2, 8, 'Hey! How is it going?');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 1, 2, 'Good thanks, n u?')
+(1, 8, 2, 'Good thanks, n u?');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 2, 1, 'Fine thanks!')
+(1, 2, 8, 'Fine thanks!');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(2, 1, 3, 'test 2')
+(2, 8, 3, 'test 2');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(2, 3, 1, 'reply 2')
+(2, 3, 8, 'reply 2');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(2, 1, 3, 'test 2a')
+(2, 8, 3, 'test 2a');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(2, 3, 1, 'reply 2a')
+(2, 3, 8, 'reply 2a');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 1, 2, 'Great to hear :)')
+(1, 8, 2, 'Great to hear :)');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 2, 1, 'Thanks')
+(1, 2, 8, 'Thanks');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 2, 1, 'neway did you want to look after my bug')
+(1, 2, 8, 'neway did you want to look after my bug');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(1, 1, 2, 'yeah sure')
+(1, 8, 2, 'yeah sure');
+--
+INSERT INTO messages (chat_id, from_user, to_user, message)
+VALUES
+(3, 1, 3, 'test 3');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(3, 1, 3, 'test 3')
+(3, 3, 1, 'reply 3');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(3, 3, 1, 'reply 3')
+(3, 1, 3, 'test 3a');
 
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
-(3, 1, 3, 'test 3a')
-
-INSERT INTO messages (chat_id, from_user, to_user, message)
-VALUES
-(3, 3, 1, 'reply 3a')
+(3, 3, 1, 'reply 3a');

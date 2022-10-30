@@ -9,7 +9,7 @@ CREATE TABLE users (
     about_bug VARCHAR(10000) NOT NULL,
     is_confirmed BOOLEAN NOT NULL DEFAULT FALSE,
     date_registered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    chats INT ARRAY
+    chats INT ARRAY DEFAULT '{}'
 );
 
 CREATE TABLE reviews (
@@ -38,5 +38,6 @@ CREATE TABLE messages (
     from_user INT NOT NULL,
     to_user INT NOT NULL,
     message VARCHAR(1000) NOT NULL,
-    message_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    message_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    opened BOOLEAN NOT NULL DEFAULT false
 );
