@@ -1,23 +1,15 @@
 <script lang="ts">
-  import { afterUpdate, onMount } from "svelte"
-  import { getUserMessages, sendUserMessage } from "../../../api/messages"
+  import { onMount } from "svelte"
+  import { getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
   import { clsx } from 'clsx' 
 
   // Open websocket to check for new messages
-  // If opened and new message -> post to db -> need value to check if it has been opened and display NEW next to the message
-  // Add opened field to messages table
   // Cache the messages
   // DELETE MESSAGE FUNCTIONALITY TOO
   onMount(async () => {
-    if ($userMessages.length == 0) {
-      await getUserMessages($userDetails.userId)
-    }
-  })
-
-  afterUpdate(async () => {
-    await getUserMessages($userDetails.userId)
+    await getUserMessages($userDetails.userId.toString())
   })
 
   let openMessage: number
@@ -25,17 +17,27 @@
   let replyAreaActive: boolean
   let replyMessage: string
 
-  const currentMessage = (messageId: number | undefined): void => {
-    openMessage = messageId
+  const currentMessage = (chatId: number | undefined): void => {
+    openMessage = chatId
   }
   const toggleReplyArea = (): boolean => replyAreaActive = !replyAreaActive
-  const handleReplySubmit = async (messageId: number): Promise<void> => {
+  const handleReplySubmit = async (chatId: number): Promise<void> => {
     await sendUserMessage({
-      chatId: messageId.toString(),
+      // @ts-ignore
+      chatId: chatId.toString(),
       fromUser: $userDetails.userId,
       toUser: toUser.toString(),
       message: replyMessage
     })
+    await getUserMessages($userDetails.userId.toString())
+  }
+  const handleOpenMessage = async (chatId: number, messageId: number, opened: boolean): Promise<void> => {
+    currentMessage(chatId)
+    handleMessageSwitchOrClose()
+    if (!opened) {
+      await updateMessageRead(messageId.toString())
+      await getUserMessages($userDetails.userId.toString())
+    }
   }
   const handleMessageSwitchOrClose = (): void => {
     replyAreaActive = false
@@ -52,10 +54,9 @@
       <div class="p-2 w-3/5">Message</div>
     </div>
     {#each $userMessages as chat}
-      <div class="w-full border-t-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]" on:click={() => {currentMessage(chat[0].chatId); handleMessageSwitchOrClose()}}>
-        <div class="p-2 w-1/5">{chat[chat.length - 1].fromUser === $userDetails.userId ? "You" : chat[0].fromUser}</div>
+      <div class={clsx("w-full border-t-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]", !chat[chat.length - 1].opened && 'bg-[#e0e0e2] font-bold')} on:click={() => {handleOpenMessage(chat[0].chatId, chat[chat.length - 1].messageId, chat[chat.length - 1].opened)}}>
+        <div class="p-2 w-1/5">{chat[chat.length - 1].fromUser === $userDetails.userId ? "You" : chat[chat.length - 1].username}</div>
         <div class="p-2 w-1/5">{new Date(chat[chat.length - 1].messageDate.substring(0, 10)).toLocaleDateString('en-AU')}</div>
-        <!-- display latest message below -->
         <div class="p-2 w-1/5">{chat[chat.length - 1].message}</div>
       </div> 
       {#if openMessage !== undefined && openMessage === chat[0].chatId}

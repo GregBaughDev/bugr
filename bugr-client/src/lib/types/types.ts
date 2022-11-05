@@ -50,7 +50,7 @@ export enum NavLinks {
   export type StatesValues = StatesProps[keyof StatesProps]
 
   export interface User {
-    userId?: string
+    userId?: number
     password?: string
     username: string
     email: string

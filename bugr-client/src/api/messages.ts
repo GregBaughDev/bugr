@@ -14,7 +14,7 @@ export const getUserMessages = async (userId: string): Promise<void> => {
         mode: 'cors' 
       }
     )
-    const result: GetMessages[] = await getMessages.json()
+    const result: GetMessages[][] = await getMessages.json()
     return userMessages.set(result)
   } catch (e) {
     console.error(e)
@@ -24,7 +24,7 @@ export const getUserMessages = async (userId: string): Promise<void> => {
 export const sendUserMessage = async (data: PostMessage): Promise<void> => {
   try {
     const postMessage = await fetch(
-      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_MESSAGE}`, 
+      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_MESSAGE}`, 
       { 
         method: 'POST', 
         headers: { 
@@ -39,5 +39,26 @@ export const sendUserMessage = async (data: PostMessage): Promise<void> => {
     }
   } catch (e) {
     console.error({e})
+  }
+}
+
+export const updateMessageRead = async (messageId: string): Promise<void> => {
+  try {
+    const putMessageRead = await fetch(
+      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_MESSAGE}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify(messageId)
+      }
+    )
+    if (putMessageRead.status === 201) {
+      // Set a global to alert user
+    }
+  } catch (e) {
+    console.error(e)
   }
 }
