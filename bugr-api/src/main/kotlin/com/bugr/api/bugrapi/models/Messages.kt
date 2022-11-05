@@ -20,5 +20,7 @@ data class Messages (
     val message: String,
     @Column(name = "MESSAGE_DATE")
     val messageDate: String?,
+    @Column(name = "OPENED")
+    val opened: Boolean,
     val username: String?
     )

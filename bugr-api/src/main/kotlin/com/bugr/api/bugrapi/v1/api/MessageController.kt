@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(
     origins = ["*"],
-    methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS],
+    methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS],
     allowedHeaders = ["*"])
 @RestController
 @RequestMapping("/api/v1")
