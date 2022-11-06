@@ -1,13 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
+  import { deleteChat, getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
   import { clsx } from 'clsx' 
 
   // Open websocket to check for new messages
   // Cache the messages
-  // DELETE MESSAGE FUNCTIONALITY TOO
   onMount(async () => {
     await getUserMessages($userDetails.userId.toString())
   })
@@ -25,7 +24,7 @@
     await sendUserMessage({
       // @ts-ignore
       chatId: chatId.toString(),
-      fromUser: $userDetails.userId,
+      fromUser: $userDetails.userId.toString(),
       toUser: toUser.toString(),
       message: replyMessage
     })
@@ -42,6 +41,12 @@
   const handleMessageSwitchOrClose = (): void => {
     replyAreaActive = false
     replyMessage = undefined
+  }
+  const handleAlertUser = async (chatId: number): Promise<void> => {
+    if (window.confirm('Are you sure you wish to delete this message')) {
+      await deleteChat(chatId.toString(), $userDetails.userId.toString())
+      await getUserMessages($userDetails.userId.toString())
+    }
   }
 </script>
 
@@ -62,8 +67,9 @@
       {#if openMessage !== undefined && openMessage === chat[0].chatId}
         {#if openMessage === chat[0].chatId}
           <div class="flex flex-row p-2 w-1/2 justify-between">
-            <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer font-bold" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
-            <div class="w-2/5 hover:bg-[#e0e0e2] cursor-pointer text-right font-bold" on:click={() => {toggleReplyArea(); toUser = chat[0].toUser}}>Reply</div>
+            <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer font-bold text-left" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
+            <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer text-center font-bold" on:click={() => {toggleReplyArea(); toUser = chat[0].toUser}}>Reply</div>
+            <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer font-bold text-right" on:click={() => handleAlertUser(chat[0].chatId)}>Delete</div>
           </div>
         {/if}
         <div class="w-full flex flex-col p-2 max-h-[400px] overflow-scroll">
