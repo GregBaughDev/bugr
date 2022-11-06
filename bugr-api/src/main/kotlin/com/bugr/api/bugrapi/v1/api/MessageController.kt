@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(
     origins = ["*"],
-    methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS],
+    methods = [RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.OPTIONS],
     allowedHeaders = ["*"])
 @RestController
 @RequestMapping("/api/v1")
@@ -29,6 +29,12 @@ class MessageController(private val messageService: MessageService) {
     @ResponseStatus(HttpStatus.OK)
     fun updateMessageOpened(@RequestBody messageId: Int): Unit {
         return messageService.updateMessageOpened(messageId)
+    }
+
+    @DeleteMapping("/messages", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @ResponseStatus(HttpStatus.OK)
+    fun deleteMessage(@RequestBody deleteChat: Map<String, String>): Unit {
+        return messageService.deleteChat(deleteChat["chatId"], deleteChat["userId"])
     }
 
 }

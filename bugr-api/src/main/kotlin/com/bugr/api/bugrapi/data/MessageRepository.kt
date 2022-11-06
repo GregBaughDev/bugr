@@ -37,4 +37,20 @@ interface MessageRepository : JpaRepository<Messages, Int> {
         nativeQuery = true
     )
     fun updateMessageOpened(messageId: Int)
+
+    @Transactional
+    @Modifying
+    @Query(
+        value = "DELETE FROM messages WHERE chat_id = :chatId",
+        nativeQuery = true
+    )
+    fun deleteAllChats(chatId: Int)
+
+    @Transactional
+    @Modifying
+    @Query(
+        value = "UPDATE users SET chats = array_remove(chats, :chatId) WHERE user_id = :userId",
+        nativeQuery = true
+    )
+    fun deleteChatFromUser(chatId: Int, userId: Int)
 }

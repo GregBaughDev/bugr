@@ -26,4 +26,15 @@ class MessageService(private val messageRepository: MessageRepository) {
     fun updateMessageOpened(messageId: Int): Unit {
         return messageRepository.updateMessageOpened(messageId)
     }
+
+    fun deleteChat(chatId: String?, userId: String?): Unit {
+        if (chatId != null && userId != null) {
+            val chatIdInt = chatId.toInt()
+            val userIdInt = userId.toInt()
+            messageRepository.deleteAllChats(chatIdInt)
+            messageRepository.deleteChatFromUser(chatIdInt, userIdInt)
+        } else {
+            throw InvalidInputException()
+        }
+    }
 }
