@@ -24,7 +24,7 @@ export const getUserMessages = async (userId: string): Promise<void> => {
 export const sendUserMessage = async (data: PostMessage): Promise<void> => {
   try {
     const postMessage = await fetch(
-      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_MESSAGE}`, 
+      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_DELETE_MESSAGE}`, 
       { 
         method: 'POST', 
         headers: { 
@@ -45,7 +45,7 @@ export const sendUserMessage = async (data: PostMessage): Promise<void> => {
 export const updateMessageRead = async (messageId: string): Promise<void> => {
   try {
     const putMessageRead = await fetch(
-      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_MESSAGE}`,
+      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_DELETE_MESSAGE}`,
       {
         method: 'PUT',
         headers: {
@@ -56,6 +56,27 @@ export const updateMessageRead = async (messageId: string): Promise<void> => {
       }
     )
     if (putMessageRead.status === 201) {
+      // Set a global to alert user
+    }
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export const deleteChat = async (chatId: string, userId: string): Promise<void> => {
+  try {
+    const deleteMessage = await fetch(
+      `${ApiRoutes.BASE}${ApiRoutes.MESSAGES.POST_PUT_DELETE_MESSAGE}`,
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify({ chatId, userId })
+      }
+    )
+    if (deleteMessage.status === 201) {
       // Set a global to alert user
     }
   } catch (e) {

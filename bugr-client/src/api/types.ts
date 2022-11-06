@@ -8,7 +8,7 @@ export const ApiRoutes = {
   },
   MESSAGES: {
     GET_MESSAGES: '/messages?userId=',
-    POST_PUT_MESSAGE: '/messages',
+    POST_PUT_DELETE_MESSAGE: '/messages',
   }
 } as const
 
