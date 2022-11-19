@@ -22,6 +22,7 @@ class MessageController(private val messageService: MessageService) {
     @PostMapping("/messages", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun saveNewMessage(@RequestBody message: Messages): Unit {
+        // Send a message here to the message service
         return messageService.postMessage(message)
     }
 
@@ -34,6 +35,8 @@ class MessageController(private val messageService: MessageService) {
     @DeleteMapping("/messages", consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
     fun deleteMessage(@RequestBody deleteChat: Map<String, String>): Unit {
+        // Change this to just remove the chat from the array so the message exists
+        // Or delete for everyone
         return messageService.deleteChat(deleteChat["chatId"], deleteChat["userId"])
     }
 
