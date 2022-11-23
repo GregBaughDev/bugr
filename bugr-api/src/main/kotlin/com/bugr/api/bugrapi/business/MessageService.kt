@@ -3,11 +3,12 @@ package com.bugr.api.bugrapi.business
 import com.bugr.api.bugrapi.data.MessageRepository
 import com.bugr.api.bugrapi.models.Messages
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
+import com.bugr.api.bugrapi.producer.config.MessageDto
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
 @Service
-class MessageService(private val messageRepository: MessageRepository, private val kafkaTemplate: KafkaTemplate<String, String>) {
+class MessageService(private val messageRepository: MessageRepository, private val kafkaTemplate: KafkaTemplate<String, MessageDto>) {
 
     fun getMessages(userId: Int): MutableList<List<Messages>> {
         val userChats: MutableList<List<Messages>> = arrayListOf()
@@ -22,7 +23,7 @@ class MessageService(private val messageRepository: MessageRepository, private v
     fun postMessage(message: Messages): Unit {
         if (message.message.isEmpty()) throw InvalidInputException()
         messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
-        kafkaTemplate.send("bugr", message.toUser.toString())
+        kafkaTemplate.send("bugr", MessageDto(message.toUser.toString(), message.chatId.toString()))
         return
     }
 
