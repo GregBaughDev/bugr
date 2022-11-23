@@ -1,4 +1,4 @@
-package com.bugr.api.bugrapi.producer.config
+package com.bugr.api.bugrapi.producer
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.kafka.common.serialization.Serializer

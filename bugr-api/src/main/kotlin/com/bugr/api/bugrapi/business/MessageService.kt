@@ -3,7 +3,7 @@ package com.bugr.api.bugrapi.business
 import com.bugr.api.bugrapi.data.MessageRepository
 import com.bugr.api.bugrapi.models.Messages
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
-import com.bugr.api.bugrapi.producer.config.MessageDto
+import com.bugr.api.bugrapi.producer.MessageDto
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 

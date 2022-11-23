@@ -1,5 +1,7 @@
 package com.bugr.api.bugrapi.producer.config
 
+import com.bugr.api.bugrapi.producer.CustomSerializer
+import com.bugr.api.bugrapi.producer.MessageDto
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringSerializer
 import org.springframework.beans.factory.annotation.Value
