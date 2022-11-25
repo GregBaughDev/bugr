@@ -1,5 +1,6 @@
 import consumer.Consumer
 import consumer.config.BugrConsumerConfig
+import consumer.config.MessageDto
 import consumer.config.TopicConfig
 import org.apache.kafka.clients.consumer.ConsumerRecords
 import org.java_websocket.WebSocket
@@ -27,15 +28,17 @@ class SocketServer(address: InetSocketAddress): WebSocketServer(address) {
 
     override fun onError(conn: WebSocket?, ex: Exception?) {
         println("Socket error")
+        ex?.printStackTrace()
     }
 
     override fun onStart() {
         println("Server started")
         consumer.subscribeConsumer()
         while (true) {
-            var records: ConsumerRecords<String, Any> = consumer.consumer.poll(Duration.ofMillis(10000))
+            var records: ConsumerRecords<String, MessageDto> = consumer.consumer.poll(Duration.ofMillis(10000))
             for (record in records) {
-                println(record.value())
+                println("${record.value().chatId}: chatid")
+                println("${record.value().userId}: userid")
             }
         }
     }
