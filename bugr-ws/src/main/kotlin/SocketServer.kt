@@ -33,9 +33,9 @@ class SocketServer(address: InetSocketAddress): WebSocketServer(address) {
         println("Server started")
         consumer.subscribeConsumer()
         while (true) {
-            var records: ConsumerRecords<String, Any> = consumer.consumer.poll(Duration.ofMillis(1000))
+            var records: ConsumerRecords<String, Any> = consumer.consumer.poll(Duration.ofMillis(10000))
             for (record in records) {
-                println(record)
+                println(record.value())
             }
         }
     }

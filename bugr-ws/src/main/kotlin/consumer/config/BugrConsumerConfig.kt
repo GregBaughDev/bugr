@@ -14,14 +14,11 @@ class BugrConsumerConfig {
         props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServers
         props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
         props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
+        props[ConsumerConfig.GROUP_ID_CONFIG] = TopicConfig.bugr.toString()
         return props
     }
 
     fun consumer(): KafkaConsumer<String, Any> {
         return KafkaConsumer<String, Any>(consumerConfig())
     }
-
-//    fun createConsumer(): KafkaConsumer<String, Any> {
-//        return consumer(consumerConfig())
-//    }
 }
