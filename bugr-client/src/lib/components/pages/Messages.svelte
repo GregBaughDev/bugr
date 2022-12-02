@@ -1,14 +1,25 @@
 <script lang="ts">
-  import { onMount } from "svelte"
+  import { onDestroy, onMount } from "svelte"
   import { deleteChat, getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
-  import { clsx } from 'clsx' 
+  import { clsx } from 'clsx'
+  import { MessageWsClient } from "../../utils/MessageWsClient"
 
   // Open websocket to check for new messages
+  // Onopen send the userId
+  // When a message is received from WS call getUserMessages
   // Cache the messages
+  const ws: MessageWsClient = new MessageWsClient($userDetails.userId.toString())
+  ws.startSocket()
+
   onMount(async () => {
     await getUserMessages($userDetails.userId.toString())
+  })
+  // Open the socket when user logs in -> make messages bold if a new message received
+  // close socket on logout
+  onDestroy(() => {
+    ws.closeSocket()
   })
 
   let openMessage: number

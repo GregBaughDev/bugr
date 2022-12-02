@@ -2,6 +2,9 @@ import consumer.Consumer
 import consumer.config.BugrConsumerConfig
 import consumer.config.MessageDto
 import consumer.config.TopicConfig
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.apache.kafka.clients.consumer.ConsumerRecords
 import org.java_websocket.WebSocket
 import org.java_websocket.handshake.ClientHandshake
@@ -24,6 +27,13 @@ class SocketServer(address: InetSocketAddress): WebSocketServer(address) {
 
     override fun onMessage(conn: WebSocket?, message: String?) {
         println(message)
+        // send a message to the socket -> check the records for the user
+        // I think we still need to call the below everyone 1 sec?
+        var records: ConsumerRecords<String, MessageDto> = consumer.consumer.poll(Duration.ofMillis(1))
+        for (record in records) {
+            println("${record.value().chatId}: chatid")
+            println("${record.value().userId}: userid")
+        }
     }
 
     override fun onError(conn: WebSocket?, ex: Exception?) {
@@ -31,11 +41,15 @@ class SocketServer(address: InetSocketAddress): WebSocketServer(address) {
         ex?.printStackTrace()
     }
 
-    override fun onStart() {
+    override fun onStart(): Unit = runBlocking {
         println("Server started")
-        consumer.subscribeConsumer()
+    }
+
+    suspend fun handleConsumer() {
+        // Move the below to co-routine
         while (true) {
-            var records: ConsumerRecords<String, MessageDto> = consumer.consumer.poll(Duration.ofMillis(10000))
+            delay(10000)
+            var records: ConsumerRecords<String, MessageDto> = consumer.consumer.poll(Duration.ofMillis(1))
             for (record in records) {
                 println("${record.value().chatId}: chatid")
                 println("${record.value().userId}: userid")
