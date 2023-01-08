@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.*
 import java.util.Optional
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/reviews")
 class ReviewController(private val reviewService: ReviewService) {
 
-    @GetMapping("/reviews")
+    @GetMapping()
     fun getReviewsForUser(@RequestParam(value = "id", required = true) id: Int): Optional<List<Reviews>> {
         return reviewService.getReviews(id)
     }
 
-    @PostMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun saveNewReview(@RequestBody reviews: Reviews): Reviews {
         return reviewService.saveReview(reviews)
     }
 
-    @DeleteMapping("/reviews")
+    @DeleteMapping()
     fun deleteReview(@RequestParam(value = "reviewId", required = true) reviewId: Int) {
         return reviewService.deleteReview(reviewId)
     }
 
-    @PatchMapping("/reviews", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PatchMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun updateReview(@RequestBody reviewMutation: ReviewsMutation): Int {
         return reviewService.updateReview(reviewMutation)
     }

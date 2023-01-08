@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/dates")
 class DateController(private val dateService: DateService) {
 
-    @GetMapping("/dates")
+    @GetMapping()
     fun getDatesForUser(@RequestParam(value = "userId", required = true) userId: Int): Optional<List<Dates>> {
         return dateService.getAllDatesForUser(userId)
     }
 
-    @PostMapping("/dates", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun saveNewDate(@RequestBody dates: Dates): Dates {
         return dateService.saveDates(dates)
     }
 
-    @PatchMapping("/dates", consumes = [MediaType.APPLICATION_JSON_VALUE])
+    @PatchMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun updateDate(@RequestBody datesMutation: DatesMutation): Int {
         return dateService.updateDates(datesMutation)
     }
