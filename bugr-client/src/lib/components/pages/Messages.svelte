@@ -4,24 +4,20 @@
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
   import { clsx } from 'clsx'
-  import { MessageWsClient } from "../../utils/MessageWsClient"
-
-  // Open websocket to check for new messages
-  // Onopen send the userId
-  // When a message is received from WS call getUserMessages
-  // Cache the messages
-  const ws: MessageWsClient = new MessageWsClient($userDetails.userId.toString())
-  ws.startSocket()
 
   onMount(async () => {
     await getUserMessages($userDetails.userId.toString())
   })
-  // Open the socket when user logs in -> make messages bold if a new message received
-  // close socket on logout
+
+  const messageInterval = setInterval( async () => {
+    await getUserMessages($userDetails.userId.toString())
+  }, 60000)
+  // test this when we can search for users to message
   onDestroy(() => {
-    ws.closeSocket()
+    clearInterval(messageInterval)
   })
 
+  // make messages bold if a new message received 
   let openMessage: number
   let toUser: number
   let replyAreaActive: boolean
