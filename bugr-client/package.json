@@ -25,6 +25,7 @@
     "vite": "^3.0.0"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "svelte-spa-router": "^3.3.0"
   }
 }
