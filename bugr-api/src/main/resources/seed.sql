@@ -1,12 +1,12 @@
-INSERT INTO users (username, user_password, email, location, state, user_type, about_bug, is_confirmed, chats)
+INSERT INTO users (username, user_password, email, location, state, user_type, about_bug, is_confirmed)
 VALUES
-('test1', 'test1', 'test1@email.com', 'Melbourne', 'VIC', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
-('test2', 'test2', 'test2@email.com', 'Sydney', 'NSW', 'OFFERING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
-('test3', 'test3', 'test3@email.com', 'Adelaide', 'SA', 'CARER', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
-('test4', 'test4', 'test4@email.com', 'Perth', 'WA', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
-('test5', 'test5', 'test5@email.com', 'Darwin', 'NT', 'OFFERING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true, '{}'),
-('test6', 'test6', 'test6@email.com', 'Brisbane', 'QLD', 'CARER', 'Sourdough bug, low maintenance. Feed once a week or whenever used', false, '{}'),
-('test7', 'test7', 'test7@email.com', 'Hobart', 'TAS', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', false, '{}');
+('test1', 'test1', 'test1@email.com', 'Melbourne', 'VIC', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true),
+('test2', 'test2', 'test2@email.com', 'Sydney', 'NSW', 'OFFERING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true),
+('test3', 'test3', 'test3@email.com', 'Adelaide', 'SA', 'CARER', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true),
+('test4', 'test4', 'test4@email.com', 'Perth', 'WA', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true),
+('test5', 'test5', 'test5@email.com', 'Darwin', 'NT', 'OFFERING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', true),
+('test6', 'test6', 'test6@email.com', 'Brisbane', 'QLD', 'CARER', 'Sourdough bug, low maintenance. Feed once a week or whenever used', false),
+('test7', 'test7', 'test7@email.com', 'Hobart', 'TAS', 'SEEKING', 'Sourdough bug, low maintenance. Feed once a week or whenever used', false);
 
 INSERT INTO reviews (author, user_reviewed, review)
 VALUES
