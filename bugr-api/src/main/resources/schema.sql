@@ -7,7 +7,7 @@ CREATE TABLE users (
    	state VARCHAR(10) NOT NULL,
 	user_type VARCHAR(10) NOT NULL,
     about_bug VARCHAR(10000) NOT NULL,
-    is_confirmed BOOLEAN NULL DEFAULT FALSE,
+    is_confirmed BOOLEAN DEFAULT FALSE,
     date_registered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     chats INT ARRAY DEFAULT '{}'
 );
