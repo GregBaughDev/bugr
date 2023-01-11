@@ -16,7 +16,7 @@ enum class State {
 @TypeDef(name = "int-array", typeClass = IntArrayType::class)
 @Entity
 @Table(name = "USERS")
-data class Users (
+data class Users(
     @Id
     @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +37,9 @@ data class Users (
     val userType: UserType,
     @Column(name = "ABOUT_BUG")
     val aboutBug: String,
-    @Column(name = "IS_CONFIRMED")
-    val isConfirmed: Boolean,
+    @Column(name = "IS_CONFIRMED", columnDefinition = "BOOLEAN DEFAULT FALSE")
+    val isConfirmed: Boolean? = false,
     @Type(type = "int-array")
     @Column(name = "CHATS")
-    val chats: String?
+    var chats: Array<Int> = arrayOf()
     )
