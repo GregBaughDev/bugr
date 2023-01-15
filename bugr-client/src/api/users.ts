@@ -3,13 +3,14 @@ import { ApiRoutes } from "./types"
 import { userDetails } from "../lib/state/userStore"
 import { userLoggedIn } from "../lib/state/globalStore"
 import { logInError, logInErrorMessage } from "../lib/state/formStore"
+import type { StatesValues, User } from "../lib/types/types"
 
 export const userLogin = async (data): Promise<void> => {
   logInError.set(false)
   logInErrorMessage.set('')
   try {
     const loginCall = await fetch(
-      `${ApiRoutes.BASE}${ApiRoutes.USERS.LOGIN}`, 
+      `${ApiRoutes.BASE}${ApiRoutes.USERS.USERS}`, 
       { 
         method: 'POST', 
         headers: { 
@@ -53,6 +54,29 @@ export const newUser = async (data): Promise<void> => {
       userDetails.set(result)
       userLoggedIn.set(true)
       push('/profile')
+    }
+  } catch (e) {
+    console.error({ e })
+  }
+}
+
+export const findUsers = async (data: StatesValues): Promise<User[]> => {
+  try {
+    const findUsersCall = await fetch(
+      `${ApiRoutes.BASE}${ApiRoutes.USERS.USERS}?state=${data}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+      }
+    )
+    const result = await findUsersCall.json()
+    if (result.staus === 400) {
+      console.log(result.message)
+    } else {
+      return result
     }
   } catch (e) {
     console.error({ e })

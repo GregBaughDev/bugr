@@ -1,10 +1,14 @@
 <script lang='ts'>
-  // Search for users by location
+  import { findUsers } from "../../../api/users";
+  import { States, type StatesValues } from "../../types/types";
+  import type { User } from "../../types/types";
+
   // be able to click on a user page and display their user page show dates and reviews
   let state: string;
+  let userSearch: User[] = []
 
-  const handleSearch = (): void => {
-    console.log('search clicked. State: ' + state)
+  const handleSearch = async (): Promise<void> => {
+    userSearch = await findUsers(state as StatesValues)
   }
 </script>
 
@@ -15,17 +19,24 @@
     <div>
       <select name="location" id="location-search" class="border-2  border-[#240465] p-3 w-full" bind:value={state}>
         <option value="">Please select a state from the dropdown:</option>
-        <option value="VIC">Victoria</option>
-        <option value="NSW">New South Wales</option>
-        <option value="SA">South Australia</option>
-        <option value="QLD">Queensland</option>
-        <option value="WA">Western Australia</option>
-        <option value="TAS">Tasmania</option>
-        <option value="ACT">ACT</option>
-        <option value="NT">Northern Territory</option>
+        {#each Object.values(States) as state}
+          <option value={state}>{state}</option>
+        {/each}
       </select>
     </div>
     <button type="submit" class="border-2 p-3 border-[#240465] mt-3" on:click={handleSearch} disabled={!state}>Search</button>
   </div>
-  <h2>SORT OUT THE USERS TABLE TO SET ISCONFIRMED TO FALSE</h2> 
+  {#if userSearch.length > 0}
+    <h2 class="text-center">All users in {state}</h2>
+    {#each userSearch as user}
+      <div class="border-2 p-3 mt-3 border-[#240465]">
+        <p>User: {user.username}</p>
+        <p>Type: {user.userType.toLowerCase()}</p>
+        <p>Location: {user.location}</p>
+        <p>About: {user.aboutBug}</p>
+      </div>
+    {/each}
+  {:else if state !== ''}
+    <p2>No results</p2>
+  {/if}
 </div>

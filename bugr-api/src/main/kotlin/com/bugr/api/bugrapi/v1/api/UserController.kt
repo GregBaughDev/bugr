@@ -1,10 +1,7 @@
 package com.bugr.api.bugrapi.v1.api
 
 import com.bugr.api.bugrapi.business.UserService
-import com.bugr.api.bugrapi.models.LoggedInUser
-import com.bugr.api.bugrapi.models.LoginForm
-import com.bugr.api.bugrapi.models.State
-import com.bugr.api.bugrapi.models.Users
+import com.bugr.api.bugrapi.models.*
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -36,7 +33,7 @@ class UserController(private val userService: UserService) {
     }
 
     @GetMapping()
-    fun findUsers(@RequestParam(value = "state", required = true) state: State): List<Users> {
+    fun findUsers(@RequestParam(value = "state", required = true) state: String): List<UserSearch> {
         return userService.findUsers(state)
     }
 

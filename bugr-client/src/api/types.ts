@@ -3,7 +3,7 @@ import type { User } from "src/lib/types/types"
 export const ApiRoutes = {
   BASE: 'http://localhost:8080/api/v1',
   USERS: {
-    LOGIN: '/users',
+    USERS: '/users',
     NEW_USER: '/users/new',
   },
   MESSAGES: {

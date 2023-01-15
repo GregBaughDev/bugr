@@ -2,6 +2,7 @@ package com.bugr.api.bugrapi.data
 
 import com.bugr.api.bugrapi.models.LoggedInUser
 import com.bugr.api.bugrapi.models.State
+import com.bugr.api.bugrapi.models.UserSearch
 import com.bugr.api.bugrapi.models.Users
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
@@ -44,5 +45,9 @@ interface UserRepository : JpaRepository<Users, Int> {
     )
     fun confirmUser(id: Int): Int
 
-    fun findByState(state: State): List<Users>
+    @Query(
+        value = "SELECT user_id as userId, username, location, state, about_bug as aboutBug, user_type as userType FROM users WHERE state = :state",
+        nativeQuery = true
+    )
+    fun findByState(state: String): List<UserSearch>
 }

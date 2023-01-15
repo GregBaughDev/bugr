@@ -3,6 +3,7 @@ package com.bugr.api.bugrapi.business
 import com.bugr.api.bugrapi.data.UserRepository
 import com.bugr.api.bugrapi.models.LoggedInUser
 import com.bugr.api.bugrapi.models.State
+import com.bugr.api.bugrapi.models.UserSearch
 import com.bugr.api.bugrapi.models.Users
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
 import com.bugr.api.bugrapi.models.exceptions.UserException
@@ -49,7 +50,7 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.confirmUser(id)
     }
 
-    fun findUsers(state: State): List<Users> {
+    fun findUsers(state: String): List<UserSearch> {
         return userRepository.findByState(state)
     }
 }

@@ -43,3 +43,12 @@ data class Users(
     @Column(name = "CHATS")
     var chats: Array<Int> = arrayOf()
     )
+
+interface UserSearch {
+    val userId: Int
+    val username: String
+    val location: String
+    val state: State
+    val aboutBug: String
+    val userType: UserType
+}
