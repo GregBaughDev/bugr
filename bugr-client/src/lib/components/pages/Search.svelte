@@ -3,12 +3,15 @@
   import { States, type StatesValues } from "../../types/types";
   import type { User } from "../../types/types";
 
-  // be able to click on a user page and display their user page show dates and reviews
-  let state: string;
+  let searchState: string;
+  let currentState: string;
   let userSearch: User[] = []
 
+  // Add a back button to UserView and find out how we access the back functionality from the router
+
   const handleSearch = async (): Promise<void> => {
-    userSearch = await findUsers(state as StatesValues)
+    userSearch = await findUsers(searchState as StatesValues)
+    currentState = searchState
   }
 </script>
 
@@ -17,26 +20,30 @@
   <h3>Find users by state</h3>
   <div class="mt-2 flex justify-center flex-col">
     <div>
-      <select name="location" id="location-search" class="border-2  border-[#240465] p-3 w-full" bind:value={state}>
+      <select name="location" id="location-search" class="border-2  border-[#240465] p-3 w-full" bind:value={searchState}>
         <option value="">Please select a state from the dropdown:</option>
         {#each Object.values(States) as state}
           <option value={state}>{state}</option>
         {/each}
       </select>
     </div>
-    <button type="submit" class="border-2 p-3 border-[#240465] mt-3" on:click={handleSearch} disabled={!state}>Search</button>
+    <button type="submit" class="border-2 p-3 border-[#240465] mt-3" on:click={handleSearch} disabled={!searchState}>Search</button>
   </div>
-  {#if userSearch.length > 0}
-    <h2 class="text-center">All users in {state}</h2>
-    {#each userSearch as user}
-      <div class="border-2 p-3 mt-3 border-[#240465]">
-        <p>User: {user.username}</p>
-        <p>Type: {user.userType.toLowerCase()}</p>
-        <p>Location: {user.location}</p>
-        <p>About: {user.aboutBug}</p>
-      </div>
-    {/each}
-  {:else if state !== ''}
-    <p2>No results</p2>
-  {/if}
+  <div class="mt-2">
+    {#if userSearch.length > 0}
+      <h2 class="text-center">All users in {currentState}</h2>
+      {#each userSearch as user}
+        <a href={`#/UserView/${user.userId}?${currentState}`}>
+          <div class="border-2 p-3 mt-3 border-[#240465]">
+            <p>User: {user.username}</p>
+            <p>Type: {user.userType.toLowerCase()}</p>
+            <p>Location: {user.location}</p>
+            <p>About: {user.aboutBug}</p>
+          </div>
+        </a>
+      {/each}
+    {:else if userSearch.length === 0 && currentState !== undefined}
+      <h2 class="text-center">No results</h2>
+    {/if}
+  </div>
 </div>
