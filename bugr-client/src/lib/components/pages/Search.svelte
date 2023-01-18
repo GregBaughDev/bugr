@@ -1,16 +1,16 @@
 <script lang='ts'>
-  import { findUsers } from "../../../api/users";
+  import { findUsersByState } from "../../../api/users";
   import { States, type StatesValues } from "../../types/types";
   import type { User } from "../../types/types";
+  import { link } from "svelte-spa-router";
 
   let searchState: string;
   let currentState: string;
+  // Better type for the below
   let userSearch: User[] = []
 
-  // Add a back button to UserView and find out how we access the back functionality from the router
-
   const handleSearch = async (): Promise<void> => {
-    userSearch = await findUsers(searchState as StatesValues)
+    userSearch = await findUsersByState(searchState as StatesValues)
     currentState = searchState
   }
 </script>
@@ -33,7 +33,8 @@
     {#if userSearch.length > 0}
       <h2 class="text-center">All users in {currentState}</h2>
       {#each userSearch as user}
-        <a href={`#/UserView/${user.userId}?${currentState}`}>
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <a use:link={{ href:`/UserView/${user.userId}?${currentState}` }}>
           <div class="border-2 p-3 mt-3 border-[#240465]">
             <p>User: {user.username}</p>
             <p>Type: {user.userType.toLowerCase()}</p>

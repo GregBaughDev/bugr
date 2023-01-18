@@ -5,6 +5,8 @@ export const ApiRoutes = {
   USERS: {
     USERS: '/users',
     NEW_USER: '/users/new',
+    STATE: '/state',
+    ID: '/id'
   },
   MESSAGES: {
     GET_MESSAGES: '/messages?userId=',

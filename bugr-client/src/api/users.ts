@@ -60,10 +60,10 @@ export const newUser = async (data): Promise<void> => {
   }
 }
 
-export const findUsers = async (data: StatesValues): Promise<User[]> => {
+export const findUsersByState = async (data: StatesValues): Promise<User[]> => {
   try {
     const findUsersCall = await fetch(
-      `${ApiRoutes.BASE}${ApiRoutes.USERS.USERS}?state=${data}`,
+      `${ApiRoutes.BASE}${ApiRoutes.USERS.USERS}${ApiRoutes.USERS.STATE}?state=${data}`,
       {
         method: 'GET',
         headers: {
@@ -74,6 +74,29 @@ export const findUsers = async (data: StatesValues): Promise<User[]> => {
     )
     const result = await findUsersCall.json()
     if (result.staus === 400) {
+      console.log(result.message)
+    } else {
+      return result
+    }
+  } catch (e) {
+    console.error({ e })
+  }
+}
+
+export const findUserById = async (id: String): Promise<User> => {
+  try {
+    const findUserCall = await fetch(
+      `${ApiRoutes.BASE}${ApiRoutes.USERS.USERS}${ApiRoutes.USERS.ID}?id=${id}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+      }
+    )
+    const result = await findUserCall.json()
+    if (result.status === 400) {
       console.log(result.message)
     } else {
       return result
