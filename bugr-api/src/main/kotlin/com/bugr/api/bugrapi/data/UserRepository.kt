@@ -50,4 +50,10 @@ interface UserRepository : JpaRepository<Users, Int> {
         nativeQuery = true
     )
     fun findByState(state: String): List<UserSearch>
+
+    @Query(
+        value = "SELECT user_id as userId, username, location, state, about_bug as aboutBug, user_type as userType FROM users WHERE user_id = :id",
+        nativeQuery = true
+    )
+    fun findUserById(id: Int): UserSearch
 }

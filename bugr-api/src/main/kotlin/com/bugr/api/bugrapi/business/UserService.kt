@@ -47,10 +47,17 @@ class UserService(private val userRepository: UserRepository) {
     }
 
     fun confirmUser(id: Int): Int {
+        // Need exception
         return userRepository.confirmUser(id)
     }
 
-    fun findUsers(state: String): List<UserSearch> {
+    fun findUsersByState(state: String): List<UserSearch> {
+        // Need exception
         return userRepository.findByState(state)
+    }
+
+    fun findUserById(id: Int): UserSearch {
+        // Need exception
+        return userRepository.findUserById(id)
     }
 }

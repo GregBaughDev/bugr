@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/v1/users")
 class UserController(private val userService: UserService) {
-
+    // TO DO: Tidy up route names. i.e below should be /login
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun userLogin(@RequestBody login: LoginForm): LoggedInUser? {
         // SORT OUT SECURITY ISSUES WITH SPRING SECURITY
@@ -32,9 +32,15 @@ class UserController(private val userService: UserService) {
         return userService.confirmUser(id.toInt())
     }
 
-    @GetMapping()
-    fun findUsers(@RequestParam(value = "state", required = true) state: String): List<UserSearch> {
-        return userService.findUsers(state)
+    @GetMapping("/state")
+    fun findUsersByState(@RequestParam(value = "state", required = true) state: String): List<UserSearch> {
+        // TO DO: When adding security, use userid here to filter out the users own record
+        return userService.findUsersByState(state)
+    }
+
+    @GetMapping("/id")
+    fun findUserById(@RequestParam(value = "id", required = true) id: String): UserSearch {
+        return userService.findUserById(id.toInt())
     }
 
 }
