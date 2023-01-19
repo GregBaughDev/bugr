@@ -2,7 +2,8 @@
   import { findUsersByState } from "../../../api/users";
   import { States, type StatesValues } from "../../types/types";
   import type { User } from "../../types/types";
-  import { link } from "svelte-spa-router";
+  import { link, querystring } from "svelte-spa-router";
+  import { onMount } from "svelte";
 
   let searchState: string;
   let currentState: string;
@@ -13,6 +14,15 @@
     userSearch = await findUsersByState(searchState as StatesValues)
     currentState = searchState
   }
+
+  $: if ($querystring) currentState = $querystring
+
+  onMount(async () => {
+    if ($querystring) {
+      userSearch = await findUsersByState($querystring as StatesValues)
+    }
+  })
+
 </script>
 
 <div class="w-10/12 p-4">
@@ -21,7 +31,7 @@
   <div class="mt-2 flex justify-center flex-col">
     <div>
       <select name="location" id="location-search" class="border-2  border-[#240465] p-3 w-full" bind:value={searchState}>
-        <option value="">Please select a state from the dropdown:</option>
+        <option>Please select a state from the dropdown:</option>
         {#each Object.values(States) as state}
           <option value={state}>{state}</option>
         {/each}
