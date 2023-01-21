@@ -1,9 +1,10 @@
 <script lang='ts'>
   import type { User } from "../../types/types";
-  import { querystring, location, link } from "svelte-spa-router";
+  import { querystring, link } from "svelte-spa-router";
   import { onMount } from "svelte";
   import { findUserById } from "../../../api/users";
   import { sentenceCase } from "../../utils/stringUtils";
+  import { userDetails } from "../../state/userStore";
 
   // Add a back button to UserView and find out how we access the back functionality from the router
   export let params = { id: undefined}
@@ -15,7 +16,14 @@
     userView = findUserById(params.id)
   })
 
-  // TO DO NEXT TIME -> SEND USER MESSAGE
+  const handleSendMessage = () => {
+    console.log("send: " + userMessage)
+    console.log("To user: " + params.id)
+    console.log("From user: " + $userDetails.userId)
+    // TO DO: Change DB table for messages
+    // Need a chats table which will send a message to a user if a chat already exists
+  }
+
 
 </script>
 
@@ -33,7 +41,7 @@
     <div class="flex justify-between flex-col w-full">
       <h3 class="text-center p-3 mt-3">Message user</h3>
       <textarea class="border-[#240465] border-2 resize-none p-2" placeholder="Enter your message" bind:value={userMessage}></textarea>
-      <button type="submit" class="border-[#240465] border-2 p-2 mt-1 font-bold" on:click={() => alert(userMessage)}>Send</button>
+      <button type="submit" class="border-[#240465] border-2 p-2 mt-1 font-bold" on:click={handleSendMessage}>Send</button>
     </div>
   {/await}
 </div>
