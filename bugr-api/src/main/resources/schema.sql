@@ -8,8 +8,7 @@ CREATE TABLE users (
 	user_type VARCHAR(10) NOT NULL,
     about_bug VARCHAR(10000) NOT NULL,
     is_confirmed BOOLEAN DEFAULT FALSE,
-    date_registered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    chats INT ARRAY DEFAULT '{}'
+    date_registered TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE reviews (
@@ -32,6 +31,12 @@ CREATE TABLE dates (
     ON DELETE CASCADE
 );
 
+CREATE TABLE chats (
+    chat_id SERIAL PRIMARY KEY,
+    to_user INT NOT NULL,
+    from_user INT NOT NULL
+);
+
 CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
     chat_id INT NOT NULL,
@@ -39,5 +44,6 @@ CREATE TABLE messages (
     to_user INT NOT NULL,
     message VARCHAR(1000) NOT NULL,
     message_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    opened BOOLEAN NOT NULL DEFAULT false
+    opened BOOLEAN NOT NULL DEFAULT false,
+    CONSTRAINT messages_chat_id FOREIGN KEY (chat_id) REFERENCES chats(chat_id)
 );
