@@ -11,10 +11,9 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.ArgumentMatchers.*
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import kotlin.test.assertFailsWith
 
@@ -116,5 +115,24 @@ internal class UserServiceTest {
         )
     }
 
-    // Look into Mockito spy for testing the correct methods are called
+    @Test
+    @DisplayName("Should call confirm user method")
+    fun shouldCallConfirmUserMethod() {
+        userService.confirmUser(1)
+        verify(userRepository, times(1)).confirmUser(1)
+    }
+
+    @Test
+    @DisplayName("Should call find by state method")
+    fun shouldCallFindByStateMethod() {
+        userService.findUsersByState("VIC")
+        verify(userRepository, times(1)).findByState("VIC")
+    }
+
+    @Test
+    @DisplayName("Should call find by user ID method")
+    fun shouldCallFindByUserIDMethod() {
+        userService.findUserById(2)
+        verify(userRepository, times(1)).findUserById(2)
+    }
 }
