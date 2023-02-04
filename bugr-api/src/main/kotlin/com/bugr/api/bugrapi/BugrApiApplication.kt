@@ -5,7 +5,7 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication
 class BugrApiApplication
-
+// TO DO - Make entities singular
 fun main(args: Array<String>) {
 	runApplication<BugrApiApplication>(*args)
 }

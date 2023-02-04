@@ -16,7 +16,7 @@ class ReviewService(private val reviewRepository: ReviewRepository) {
 
     fun saveReview(reviews: Reviews): Reviews {
         if (reviews.review.isEmpty()) throw InvalidInputException()
-
+        // TO DO: " " is not empty
         return reviewRepository.save(reviews)
     }
 
@@ -29,5 +29,4 @@ class ReviewService(private val reviewRepository: ReviewRepository) {
 
         return reviewRepository.updateReview(reviewMutation.reviewId, reviewMutation.review)
     }
-
 }

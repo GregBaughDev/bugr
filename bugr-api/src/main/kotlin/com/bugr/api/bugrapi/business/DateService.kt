@@ -11,7 +11,7 @@ import java.util.*
 class DateService(private val dateRepository: DateRepository) {
 
     fun validateDates(from: Date, to: Date): Boolean {
-        return from.before(to) || from == to
+        return from.before(to) || from === to
     }
 
     fun getAllDatesForUser(id: Int): Optional<List<Dates>> {
