@@ -1,9 +1,9 @@
 package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.DateRepository
-import com.bugr.api.bugrapi.models.Dates
+import com.bugr.api.bugrapi.models.Date
 import com.bugr.api.bugrapi.models.exceptions.InvalidDateException
-import com.bugr.api.bugrapi.models.mutations.DatesMutation
+import com.bugr.api.bugrapi.models.mutations.DateMutation
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.util.*
@@ -15,11 +15,11 @@ class DateService(private val dateRepository: DateRepository) {
         return from.isBefore(to) || from.isEqual(to)
     }
 
-    fun getAllDatesForUser(id: Int): Optional<List<Dates>> {
+    fun getAllDatesForUser(id: Int): Optional<List<Date>> {
         return dateRepository.getAllDatesForUser(id)
     }
 
-    fun saveDates(dates: Dates): Dates {
+    fun saveDates(dates: Date): Date {
         if (dates.dateTo === null ||
             dates.dateFrom === null ||
             !validateDates(dates.dateFrom, dates.dateTo)) throw InvalidDateException()
@@ -27,7 +27,7 @@ class DateService(private val dateRepository: DateRepository) {
         return dateRepository.save(dates)
     }
 
-    fun updateDates(datesMutation: DatesMutation): Int {
+    fun updateDates(datesMutation: DateMutation): Int {
         if (!validateDates(datesMutation.dateFrom, datesMutation.dateTo)) throw InvalidDateException()
 
         return dateRepository.updateDates(datesMutation.userDates, datesMutation.dateId, datesMutation.dateFrom, datesMutation.dateTo)

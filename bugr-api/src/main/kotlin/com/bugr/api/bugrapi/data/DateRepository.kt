@@ -1,6 +1,6 @@
 package com.bugr.api.bugrapi.data
 
-import com.bugr.api.bugrapi.models.Dates
+import com.bugr.api.bugrapi.models.Date
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -11,19 +11,19 @@ import java.util.*
 
 @Transactional
 @Repository
-interface DateRepository : JpaRepository<Dates, Int> {
+interface DateRepository : JpaRepository<Date, Int> {
 
     @Query(
         value = "SELECT * FROM dates WHERE user_dates = :user",
         nativeQuery = true
     )
-    fun getAllDatesForUser(user: Int): Optional<List<Dates>>
+    fun getAllDatesForUser(user: Int): Optional<List<Date>>
 
     @Query(
         value = "SELECT * FROM dates WHERE date_id = :id",
         nativeQuery = true
     )
-    fun getDatesById(id: Int): List<Dates>
+    fun getDatesById(id: Int): List<Date>
 
     @Modifying
     @Query(

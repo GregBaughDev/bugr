@@ -1,9 +1,9 @@
 package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.DateRepository
-import com.bugr.api.bugrapi.models.Dates
+import com.bugr.api.bugrapi.models.Date
 import com.bugr.api.bugrapi.models.exceptions.InvalidDateException
-import com.bugr.api.bugrapi.models.mutations.DatesMutation
+import com.bugr.api.bugrapi.models.mutations.DateMutation
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -58,7 +58,7 @@ internal class DateServiceTest {
     @Test
     @DisplayName("Should throw exception when date to value is null")
     fun shouldThrowExceptionWhenDateToIsNull() {
-        val date = Dates(1, 2, null, LocalDate.parse("2020-10-10"))
+        val date = Date(1, 2, null, LocalDate.parse("2020-10-10"))
         assertFailsWith(
             exceptionClass = InvalidDateException::class,
             block = { dateService.saveDates(date) }
@@ -68,7 +68,7 @@ internal class DateServiceTest {
     @Test
     @DisplayName("Should throw exception when date from value is null")
     fun shouldThrowExceptionWhenDateFromIsNull() {
-        val date = Dates(1, 2, LocalDate.parse("2020-10-10"), null)
+        val date = Date(1, 2, LocalDate.parse("2020-10-10"), null)
         assertFailsWith(
             exceptionClass = InvalidDateException::class,
             block = { dateService.saveDates(date) }
@@ -78,7 +78,7 @@ internal class DateServiceTest {
     @Test
     @DisplayName("Should throw exception when dates are invalid")
     fun shouldThrowExceptionWhenDatesAreInvalid() {
-        val date = Dates(1, 2, LocalDate.parse("2020-10-10"), LocalDate.parse("2020-01-01"))
+        val date = Date(1, 2, LocalDate.parse("2020-10-10"), LocalDate.parse("2020-01-01"))
         assertFailsWith(
             exceptionClass = InvalidDateException::class,
             block = { dateService.saveDates(date) }
@@ -88,7 +88,7 @@ internal class DateServiceTest {
     @Test
     @DisplayName("Should throw exception when updating with invalid dates")
     fun shouldThrowExceptionWhenUpdatingWithInvalidDates() {
-        val date = DatesMutation(1, 2, LocalDate.parse("2020-10-10"), LocalDate.parse("2020-01-01"))
+        val date = DateMutation(1, 2, LocalDate.parse("2020-10-10"), LocalDate.parse("2020-01-01"))
         assertFailsWith(
             exceptionClass = InvalidDateException::class,
             block = { dateService.updateDates(date) }
@@ -98,7 +98,7 @@ internal class DateServiceTest {
     @Test
     @DisplayName("Should call update dates method")
     fun shouldCallUpdateDatesMethod() {
-        val date = DatesMutation(1, 2, LocalDate.parse("2020-01-01"), LocalDate.parse("2020-10-10"))
+        val date = DateMutation(1, 2, LocalDate.parse("2020-01-01"), LocalDate.parse("2020-10-10"))
         dateService.updateDates(date)
         verify(dateRepository, times(1)).updateDates(date.userDates, date.dateId, date.dateFrom, date.dateTo)
     }

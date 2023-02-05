@@ -1,7 +1,7 @@
 package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.MessageRepository
-import com.bugr.api.bugrapi.models.Messages
+import com.bugr.api.bugrapi.models.Message
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
 import com.bugr.api.bugrapi.producer.MessageDto
 import org.springframework.kafka.core.KafkaTemplate
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service
 @Service
 class MessageService(private val messageRepository: MessageRepository, private val kafkaTemplate: KafkaTemplate<String, MessageDto>) {
 
-    fun getMessages(userId: Int): MutableList<List<Messages>> {
-        val userChats: MutableList<List<Messages>> = arrayListOf()
+    fun getMessages(userId: Int): MutableList<List<Message>> {
+        val userChats: MutableList<List<Message>> = arrayListOf()
         val userChatsString: String = messageRepository.getUserChats(userId)
         val userChatsArray: List<String> = userChatsString.split(',')
         if (userChatsArray[0].isNotEmpty()) {
@@ -20,18 +20,18 @@ class MessageService(private val messageRepository: MessageRepository, private v
         return userChats
     }
 
-    fun postMessage(message: Messages): Unit {
+    fun postMessage(message: Message) {
         if (message.message.isEmpty()) throw InvalidInputException()
         messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
         kafkaTemplate.send("bugr", MessageDto(message.toUser.toString(), message.chatId.toString()))
         return
     }
 
-    fun updateMessageOpened(messageId: Int): Unit {
+    fun updateMessageOpened(messageId: Int) {
         return messageRepository.updateMessageOpened(messageId)
     }
 
-    fun deleteChat(chatId: String?, userId: String?): Unit {
+    fun deleteChat(chatId: String?, userId: String?) {
         if (chatId != null && userId != null) {
             val chatIdInt = chatId.toInt()
             val userIdInt = userId.toInt()

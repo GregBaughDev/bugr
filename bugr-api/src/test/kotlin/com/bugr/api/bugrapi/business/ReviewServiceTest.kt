@@ -1,9 +1,9 @@
 package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.ReviewRepository
-import com.bugr.api.bugrapi.models.Reviews
+import com.bugr.api.bugrapi.models.Review
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
-import com.bugr.api.bugrapi.models.mutations.ReviewsMutation
+import com.bugr.api.bugrapi.models.mutations.ReviewMutation
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -32,7 +32,7 @@ internal class ReviewServiceTest {
     @Test
     @DisplayName("Should throw exception when review is empty")
     fun throwExceptionWhenReviewIsEmpty() {
-        val review = Reviews(1, 2, 3, "")
+        val review = Review(1, 2, 3, "")
         assertFailsWith(
             exceptionClass = InvalidInputException::class,
             block = { reviewService.saveReview(review) }
@@ -42,7 +42,7 @@ internal class ReviewServiceTest {
     @Test
     @DisplayName("Should throw exception when review update length is less than 10")
     fun throwExceptionIfReviewUpdateIsTooShort() {
-        val reviewMutation = ReviewsMutation(1, "short")
+        val reviewMutation = ReviewMutation(1, "short")
         assertFailsWith(
             exceptionClass = InvalidInputException::class,
             block = { reviewService.updateReview(reviewMutation) }
