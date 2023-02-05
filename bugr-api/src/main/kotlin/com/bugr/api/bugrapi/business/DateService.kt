@@ -5,13 +5,14 @@ import com.bugr.api.bugrapi.models.Dates
 import com.bugr.api.bugrapi.models.exceptions.InvalidDateException
 import com.bugr.api.bugrapi.models.mutations.DatesMutation
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 import java.util.*
 
 @Service
 class DateService(private val dateRepository: DateRepository) {
 
-    fun validateDates(from: Date, to: Date): Boolean {
-        return from.before(to) || from === to
+    fun validateDates(from: LocalDate, to: LocalDate): Boolean {
+        return from.isBefore(to) || from.isEqual(to)
     }
 
     fun getAllDatesForUser(id: Int): Optional<List<Dates>> {

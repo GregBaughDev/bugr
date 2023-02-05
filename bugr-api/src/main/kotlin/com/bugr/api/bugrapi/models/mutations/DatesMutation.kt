@@ -1,10 +1,10 @@
 package com.bugr.api.bugrapi.models.mutations
 
-import java.util.Date
+import java.time.LocalDate
 
 data class DatesMutation(
     var dateId: Int,
     var userDates: Int,
-    var dateFrom: Date,
-    var dateTo: Date
+    var dateFrom: LocalDate,
+    var dateTo: LocalDate
 )

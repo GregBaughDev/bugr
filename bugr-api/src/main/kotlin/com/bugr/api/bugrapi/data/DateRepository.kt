@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDate
 import java.util.*
 
 @Transactional
@@ -29,5 +30,5 @@ interface DateRepository : JpaRepository<Dates, Int> {
         value = "UPDATE dates SET date_from = :dateFrom, date_to = :dateTo WHERE date_id = :dateId AND user_dates = :userId",
         nativeQuery = true
     )
-    fun updateDates(userId: Int, dateId: Int, dateFrom: Date, dateTo: Date): Int
+    fun updateDates(userId: Int, dateId: Int, dateFrom: LocalDate, dateTo: LocalDate): Int
 }
