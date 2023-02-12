@@ -65,7 +65,7 @@
       <div class="p-2 w-1/5">Date</div>
       <div class="p-2 w-3/5">Message</div>
     </div>
-    {#if $userMessages.length > 0}
+    {#if $userMessages?.length > 0}
       {#each $userMessages as chat}
         <div class={clsx("w-full border-t-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]", !chat[chat.length - 1].opened && 'bg-[#e0e0e2] font-bold')} on:click={() => {handleOpenMessage(chat[0].chatId, chat[chat.length - 1].messageId, chat[chat.length - 1].opened)}}>
           <div class="p-2 w-1/5">{chat[chat.length - 1].fromUser === $userDetails.userId ? "You" : chat[chat.length - 1].username}</div>
