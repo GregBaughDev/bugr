@@ -21,23 +21,14 @@ class MessageController(private val messageService: MessageService) {
 
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveNewMessage(@RequestBody message: Messages): Unit {
+    fun saveNewMessage(@RequestBody message: Messages) {
         // Send a message here to the message service
         return messageService.postMessage(message)
     }
 
     @PutMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.OK)
-    fun updateMessageOpened(@RequestBody messageId: Int): Unit {
+    fun updateMessageOpened(@RequestBody messageId: Int) {
         return messageService.updateMessageOpened(messageId)
     }
-
-    @DeleteMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
-    @ResponseStatus(HttpStatus.OK)
-    fun deleteMessage(@RequestBody deleteChat: Map<String, String>): Unit {
-        // Change this to just remove the chat from the array so the message exists
-        // Or delete for everyone
-        return messageService.deleteChat(deleteChat["chatId"], deleteChat["userId"])
-    }
-
 }

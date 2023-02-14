@@ -1,44 +1,37 @@
 package com.bugr.api.bugrapi.business
 
 import com.bugr.api.bugrapi.data.MessageRepository
+import com.bugr.api.bugrapi.models.Chat
 import com.bugr.api.bugrapi.models.Messages
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
-import com.bugr.api.bugrapi.producer.MessageDto
-import org.springframework.kafka.core.KafkaTemplate
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.Optional
 
 @Service
-class MessageService(private val messageRepository: MessageRepository, private val kafkaTemplate: KafkaTemplate<String, MessageDto>) {
+class MessageService(private val messageRepository: MessageRepository) {
+    @Autowired
+    lateinit var chatService: ChatService
 
     fun getMessages(userId: Int): MutableList<List<Messages>> {
-        val userChats: MutableList<List<Messages>> = arrayListOf()
-        val userChatsString: String = messageRepository.getUserChats(userId)
-        val userChatsArray: List<String> = userChatsString.split(',')
-        if (userChatsArray[0].isNotEmpty()) {
-            userChatsArray.forEach() { userChats.add(messageRepository.getAllChatMessages(it.toInt())) }
+        val userMessages: MutableList<List<Messages>> = mutableListOf();
+        val userChats: Optional<List<Chat>> = chatService.getAllChatsForUser(userId);
+
+        if (userChats.get().isNotEmpty()) {
+            userChats.get().forEach {
+                userMessages.add(messageRepository.getAllChatMessages(it.chatId))
+            }
         }
-        return userChats
+        return userMessages
     }
 
-    fun postMessage(message: Messages): Unit {
+    fun postMessage(message: Messages) {
         if (message.message.isEmpty()) throw InvalidInputException()
-        messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
-        kafkaTemplate.send("bugr", MessageDto(message.toUser.toString(), message.chatId.toString()))
-        return
+        return messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
     }
 
-    fun updateMessageOpened(messageId: Int): Unit {
+    fun updateMessageOpened(messageId: Int) {
         return messageRepository.updateMessageOpened(messageId)
     }
-
-    fun deleteChat(chatId: String?, userId: String?): Unit {
-        if (chatId != null && userId != null) {
-            val chatIdInt = chatId.toInt()
-            val userIdInt = userId.toInt()
-            messageRepository.deleteAllChats(chatIdInt)
-            messageRepository.deleteChatFromUser(chatIdInt, userIdInt)
-        } else {
-            throw InvalidInputException()
-        }
-    }
+        // ADD LOGGING TO THIS APP
 }

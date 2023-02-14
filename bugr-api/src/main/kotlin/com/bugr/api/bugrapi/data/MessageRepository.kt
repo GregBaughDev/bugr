@@ -11,12 +11,6 @@ import org.springframework.transaction.annotation.Transactional
 interface MessageRepository : JpaRepository<Messages, Int> {
 
     @Query(
-        value = "SELECT chats FROM users WHERE user_id = :userId",
-        nativeQuery = true
-    )
-    fun getUserChats(userId: Int): String
-
-    @Query(
         value = "SELECT m.*, u.username FROM messages AS m INNER JOIN users as u ON m.from_user = u.user_id WHERE chat_id = :chatId ORDER BY message_date ASC",
         nativeQuery = true
     )
@@ -37,20 +31,4 @@ interface MessageRepository : JpaRepository<Messages, Int> {
         nativeQuery = true
     )
     fun updateMessageOpened(messageId: Int)
-
-    @Transactional
-    @Modifying
-    @Query(
-        value = "DELETE FROM messages WHERE chat_id = :chatId",
-        nativeQuery = true
-    )
-    fun deleteAllChats(chatId: Int)
-
-    @Transactional
-    @Modifying
-    @Query(
-        value = "UPDATE users SET chats = array_remove(chats, :chatId) WHERE user_id = :userId",
-        nativeQuery = true
-    )
-    fun deleteChatFromUser(chatId: Int, userId: Int)
 }
