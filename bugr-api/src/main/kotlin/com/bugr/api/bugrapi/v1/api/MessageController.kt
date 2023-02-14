@@ -31,13 +31,4 @@ class MessageController(private val messageService: MessageService) {
     fun updateMessageOpened(@RequestBody messageId: Int) {
         return messageService.updateMessageOpened(messageId)
     }
-
-    @DeleteMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
-    @ResponseStatus(HttpStatus.OK)
-    fun deleteMessage(@RequestBody deleteChat: Map<String, String>) {
-        // Change this to just remove the chat from the array so the message exists
-        // Or delete for everyone
-        return messageService.deleteChat(deleteChat["chatId"], deleteChat["userId"])
-    }
-
 }

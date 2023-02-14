@@ -22,6 +22,10 @@ VALUES
 (3, '2022-09-10', '2022-09-21'),
 (4, '2022-10-01', '2022-10-30');
 
+INSERT INTO chats VALUES (1, 2, 8);
+INSERT INTO chats VALUES (2, 3, 8);
+INSERT INTO chats VALUES (3, 1, 3);
+
 INSERT INTO messages (chat_id, from_user, to_user, message)
 VALUES
 (1, 8, 2, 'Hi there!');
