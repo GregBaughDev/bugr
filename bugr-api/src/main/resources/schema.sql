@@ -24,11 +24,9 @@ CREATE TABLE reviews (
 
 CREATE TABLE dates (
     date_id SERIAL PRIMARY KEY,
-    user_dates INT NOT NULL,
+    user_dates INT NOT NULL REFERENCES users (user_id) ON DELETE CASCADE,
     date_from DATE NOT NULL,
-    date_to DATE NOT NULL,
-    CONSTRAINT dates_fkey FOREIGN KEY (user_dates) REFERENCES users(user_id)
-    ON DELETE CASCADE
+    date_to DATE NOT NULL
 );
 
 CREATE TABLE chats (
@@ -39,11 +37,10 @@ CREATE TABLE chats (
 
 CREATE TABLE messages (
     message_id SERIAL PRIMARY KEY,
-    chat_id INT NOT NULL,
+    chat_id INT NOT NULL REFERENCES chats (chat_id) ON DELETE CASCADE,
     from_user INT NOT NULL,
     to_user INT NOT NULL,
     message VARCHAR(1000) NOT NULL,
     message_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    opened BOOLEAN NOT NULL DEFAULT false,
-    CONSTRAINT messages_chat_id FOREIGN KEY (chat_id) REFERENCES chats(chat_id)
+    opened BOOLEAN NOT NULL DEFAULT false
 );
