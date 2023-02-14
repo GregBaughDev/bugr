@@ -20,14 +20,18 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.security:spring-security-core")
-//	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("com.vladmihalcea:hibernate-types-55:2.19.2")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.postgresql:postgresql")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+	implementation("junit:junit:4.13.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.mockito:mockito-core:5.0.0")
+	testImplementation("net.bytebuddy:byte-buddy:1.12.9")
+	implementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
 }
 
 tasks.withType<KotlinCompile> {

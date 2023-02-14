@@ -1,7 +1,7 @@
 package com.bugr.api.bugrapi.v1.api
 
 import com.bugr.api.bugrapi.business.MessageService
-import com.bugr.api.bugrapi.models.Messages
+import com.bugr.api.bugrapi.models.Message
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*
 class MessageController(private val messageService: MessageService) {
 
     @GetMapping()
-    fun getAllUserChats(@RequestParam(value = "userId", required = true) userId: Int): MutableList<List<Messages>> {
+    fun getAllUserChats(@RequestParam(value = "userId", required = true) userId: Int): MutableList<List<Message>> {
         return messageService.getMessages(userId)
     }
 
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
-    fun saveNewMessage(@RequestBody message: Messages) {
+    fun saveNewMessage(@RequestBody message: Message) {
         // Send a message here to the message service
         return messageService.postMessage(message)
     }

@@ -1,11 +1,10 @@
 package com.bugr.api.bugrapi.models
 
-import com.sun.istack.Nullable
 import javax.persistence.*
 
 @Entity
 @Table(name = "MESSAGES")
-data class Messages (
+data class Message (
     @Id
     @Column(name = "MESSAGE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,11 +1,11 @@
 package com.bugr.api.bugrapi.models
 
-import java.util.*
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
 @Table(name = "DATES")
-data class Dates (
+data class Date (
     @Id
     @Column(name = "DATE_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ data class Dates (
     @Column(name = "USER_DATES")
     val userDates: Int,
     @Column(name = "DATE_FROM")
-    val dateFrom: Date?,
+    val dateFrom: LocalDate?,
     @Column(name = "DATE_TO")
-    val dateTo: Date?
+    val dateTo: LocalDate?
     )

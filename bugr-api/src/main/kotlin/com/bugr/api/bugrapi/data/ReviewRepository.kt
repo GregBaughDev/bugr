@@ -1,6 +1,6 @@
 package com.bugr.api.bugrapi.data
 
-import com.bugr.api.bugrapi.models.Reviews
+import com.bugr.api.bugrapi.models.Review
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
@@ -10,13 +10,13 @@ import java.util.Optional
 
 @Transactional
 @Repository
-interface ReviewRepository : JpaRepository<Reviews, Int> {
+interface ReviewRepository : JpaRepository<Review, Int> {
 
     @Query(
         value = "SELECT * FROM reviews WHERE user_reviewed = :id",
         nativeQuery = true
     )
-    fun getAllReviewsForUser(id: Int): Optional<List<Reviews>>
+    fun getAllReviewsForUser(id: Int): Optional<List<Review>>
 
     @Modifying
     @Query(
