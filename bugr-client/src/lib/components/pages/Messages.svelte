@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte"
-  import { deleteChat, getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
+  import { getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
+  import { deleteChat } from "../../../api/chats"
   import { userMessages } from "../../../lib/state/globalStore"
   import { userDetails } from "../../../lib/state/userStore"
   import { clsx } from 'clsx'
@@ -50,8 +51,8 @@
     replyMessage = undefined
   }
   const handleAlertUser = async (chatId: number): Promise<void> => {
-    if (window.confirm('Are you sure you wish to delete this message')) {
-      await deleteChat(chatId.toString(), $userDetails.userId.toString())
+    if (window.confirm('Are you sure you wish to delete this chat')) {
+      await deleteChat(chatId.toString())
       await getUserMessages($userDetails.userId.toString())
     }
   }

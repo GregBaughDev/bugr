@@ -10,7 +10,10 @@ export const ApiRoutes = {
   },
   MESSAGES: {
     GET_MESSAGES: '/messages?userId=',
-    POST_PUT_DELETE_MESSAGE: '/messages',
+    POST_PUT_MESSAGE: '/messages',
+  },
+  CHATS: {
+    DELETE_CHATS: '/chats/'
   }
 } as const
 
