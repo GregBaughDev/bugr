@@ -10,7 +10,7 @@ data class Message (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val messageId: Int,
     @Column(name = "CHAT_ID")
-    val chatId: Int,
+    var chatId: Int?,
     @Column(name = "FROM_USER")
     val fromUser: Int,
     @Column(name = "TO_USER")

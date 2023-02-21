@@ -26,8 +26,19 @@ class MessageService(private val messageRepository: MessageRepository) {
     }
 
     fun postMessage(message: Message) {
+        // LOOK INTO THE BELOW - Exception not being thrown
         if (message.message.isEmpty()) throw InvalidInputException()
-        return messageRepository.saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
+
+        if (message.chatId?.toString().isNullOrBlank()) {
+            val chatId: Optional<Int> = chatService.getChatForUserAndRecipient(message.toUser, message.fromUser)
+            if (chatId.isPresent) {
+                message.chatId = chatId.get()
+            } else {
+                val newChatId = chatService.createNewChatForUserAndRecipient(message.toUser, message.fromUser)
+                message.chatId = newChatId
+            }
+        }
+         return messageRepository.saveUserMessage(message.chatId as Int, message.fromUser, message.toUser, message.message)
     }
 
     fun updateMessageOpened(messageId: Int) {
