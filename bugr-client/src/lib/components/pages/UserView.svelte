@@ -5,9 +5,9 @@
   import { findUserById } from "../../../api/users";
   import { sentenceCase } from "../../utils/stringUtils";
   import { userDetails } from "../../state/userStore";
+  import { sendUserMessage } from "../../../api/messages";
 
-  // Add a back button to UserView and find out how we access the back functionality from the router
-  export let params = { id: undefined}
+  export let params = { id: undefined }
   // Better type for the below
   let userView: Promise<User> = findUserById(params.id)
   let userMessage: string
@@ -17,13 +17,12 @@
   })
 
   const handleSendMessage = () => {
-    console.log("send: " + userMessage)
-    console.log("To user: " + params.id)
-    console.log("From user: " + $userDetails.userId)
-    // TO DO: Change DB table for messages
-    // Need a chats table which will send a message to a user if a chat already exists
+    sendUserMessage({
+      fromUser: $userDetails.userId.toString(),
+      toUser: params.id,
+      message: userMessage
+    })
   }
-
 
 </script>
 
