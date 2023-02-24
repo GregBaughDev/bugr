@@ -42,11 +42,9 @@ export interface GetMessages {
 }
 
 export interface PostMessage {
-  body: {
-    chatId: string
-    fromUser: string
-    toUser: string
-    message: string
-  }
+  chatId?: string
+  fromUser: string
+  toUser: string
+  message: string
 }
 
