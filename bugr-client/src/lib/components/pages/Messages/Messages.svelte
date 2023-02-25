@@ -1,10 +1,12 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte"
-  import { getUserMessages, sendUserMessage, updateMessageRead } from "../../../api/messages"
-  import { deleteChat } from "../../../api/chats"
-  import { userMessages } from "../../../lib/state/globalStore"
-  import { userDetails } from "../../../lib/state/userStore"
+  import { getUserMessages, sendUserMessage, updateMessageRead } from "../../../../api/messages"
+  import { deleteChat } from "../../../../api/chats"
+  import { userMessages } from "../../../state/globalStore"
+  import { userDetails } from "../../../state/userStore"
   import { clsx } from 'clsx'
+  import MessagesInformation from "./MessagesInformation.svelte";
+  import MessagesController from "./MessagesController.svelte";
 
   onMount(async () => {
     await getUserMessages($userDetails.userId.toString())
@@ -13,27 +15,26 @@
   const messageInterval = setInterval( async () => {
     await getUserMessages($userDetails.userId.toString())
   }, 60000)
-  // test this when we can search for users to message
+
   onDestroy(() => {
     clearInterval(messageInterval)
   })
 
-  // make messages bold if a new message received 
   let openMessage: number
-  let toUser: number
+  let fromUser: number
   let replyAreaActive: boolean
   let replyMessage: string
-
+  console.log({ fromUser })
   const currentMessage = (chatId: number | undefined): void => {
     openMessage = chatId
   }
   const toggleReplyArea = (): boolean => replyAreaActive = !replyAreaActive
   const handleReplySubmit = async (chatId: number): Promise<void> => {
+    // There's an issue here where the touser and fromuser are the same
     await sendUserMessage({
-      // @ts-ignore
       chatId: chatId.toString(),
       fromUser: $userDetails.userId.toString(),
-      toUser: toUser.toString(),
+      toUser: fromUser.toString(),
       message: replyMessage
     })
     await getUserMessages($userDetails.userId.toString())
@@ -56,6 +57,16 @@
       await getUserMessages($userDetails.userId.toString())
     }
   }
+
+  const props = {
+    userId: $userDetails.userId,
+    openMessage: handleOpenMessage,
+    currentMessage: currentMessage,
+    handleMessageSwitchOrClose: handleMessageSwitchOrClose,
+    toggleReplyArea: toggleReplyArea,
+    handleAlertUser: handleAlertUser,
+    fromUser: fromUser
+  }
 </script>
 
 <div class="w-10/12 p-4 h-full">
@@ -68,18 +79,16 @@
     </div>
     {#if $userMessages?.length > 0}
       {#each $userMessages as chat}
-        <div class={clsx("w-full border-t-2 h-1/5 border-[#240465] flex flex-row cursor-pointer hover:bg-[#e0e0e2]", !chat[chat.length - 1].opened && 'bg-[#e0e0e2] font-bold')} on:click={() => {handleOpenMessage(chat[0].chatId, chat[chat.length - 1].messageId, chat[chat.length - 1].opened)}}>
-          <div class="p-2 w-1/5">{chat[chat.length - 1].fromUser === $userDetails.userId ? "You" : chat[chat.length - 1].username}</div>
-          <div class="p-2 w-1/5">{new Date(chat[chat.length - 1].messageDate.substring(0, 10)).toLocaleDateString('en-AU')}</div>
-          <div class="p-2 w-1/5">{chat[chat.length - 1].message}</div>
-        </div> 
+        <MessagesInformation chatProps={chat} {...props} />
         {#if openMessage !== undefined && openMessage === chat[0].chatId}
           {#if openMessage === chat[0].chatId}
-            <div class="flex flex-row p-2 w-1/2 justify-between">
+            <!-- <div class="flex flex-row p-2 w-1/2 justify-between">
               <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer font-bold text-left" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
-              <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer text-center font-bold" on:click={() => {toggleReplyArea(); toUser = chat[0].toUser}}>Reply</div>
+              <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer text-center font-bold" on:click={() => {toggleReplyArea(); fromUser = chat[0].toUser === $userDetails.userId ? chat[0].fromUser : chat[0].toUser}}>Reply</div>
               <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer font-bold text-right" on:click={() => handleAlertUser(chat[0].chatId)}>Delete</div>
-            </div>
+            </div> -->
+            <!-- TO DO: messages are now being ordered by user -->
+            <MessagesController chat={chat[0]} {...props} />
           {/if}
           <div class="w-full flex flex-col p-2 max-h-[400px] overflow-scroll">
             {#each chat as message}
@@ -91,7 +100,7 @@
             {#if replyAreaActive}
               <div class="flex justify-between flex-col w-1/2">
                 <textarea class="border-[#240465] border-2 resize-none p-2" placeholder="Enter your reply..." bind:value={replyMessage}></textarea>
-                <button class="border-[#240465] border-2 p-2 mt-1 font-bold" on:click={() => {handleReplySubmit(openMessage); handleMessageSwitchOrClose()}} disabled={replyMessage == undefined}>Send</button>
+                <button class="border-[#240465] border-2 p-2 mt-1 font-bold" on:click={() => {handleReplySubmit(openMessage); handleMessageSwitchOrClose()}} disabled={replyMessage === undefined}>Send</button>
               </div>
             {/if}
           </div>

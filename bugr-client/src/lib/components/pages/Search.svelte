@@ -14,9 +14,9 @@
     userSearch = await findUsersByState(searchState as StatesValues)
     currentState = searchState
   }
-
+  // TO DO - SELECT STATE IF ONE EXISTS
   $: if ($querystring) currentState = $querystring
-
+  console.log({ currentState, $querystring })
   onMount(async () => {
     if ($querystring) {
       userSearch = await findUsersByState($querystring as StatesValues)
@@ -33,6 +33,8 @@
       <select name="location" id="location-search" class="border-2  border-[#240465] p-3 w-full" bind:value={searchState}>
         <option>Please select a state from the dropdown:</option>
         {#each Object.values(States) as state}
+          {console.log($querystring === state, " : querystringstate")}
+          {console.log({ state, $querystring })}
           <option value={state}>{state}</option>
         {/each}
       </select>
