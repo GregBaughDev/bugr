@@ -1,7 +1,7 @@
 import { NavLinks } from '../types/types';
 import Home from '../components/pages/Home.svelte';
 import Login from '../components/pages/Login.svelte';
-import Messages from '../components/pages/Messages.svelte';
+import Messages from '../components/pages/Messages/Messages.svelte';
 import Profile from '../components/pages/Profile.svelte';
 import Search from '../components/pages/Search.svelte';
 import About from '../components/pages/About.svelte';
