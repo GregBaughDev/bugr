@@ -4,10 +4,11 @@
   import { deleteChat } from "../../../../api/chats"
   import { userMessages } from "../../../state/globalStore"
   import { userDetails } from "../../../state/userStore"
-  import { clsx } from 'clsx'
   import MessagesInformation from "./MessagesInformation.svelte";
   import MessagesController from "./MessagesController.svelte";
-
+  import Message from "./Message.svelte";
+  import MessageReplyArea from "./MessageReplyArea.svelte";
+  // TO DO: Refactor this whole component
   onMount(async () => {
     await getUserMessages($userDetails.userId.toString())
   })
@@ -20,17 +21,19 @@
     clearInterval(messageInterval)
   })
 
-  let openMessage: number
   let fromUser: number
+  const setFromUser = (from: number) => fromUser = from
+  
+  let openMessage: number
   let replyAreaActive: boolean
-  let replyMessage: string
-  console.log({ fromUser })
+  
   const currentMessage = (chatId: number | undefined): void => {
     openMessage = chatId
   }
+  
   const toggleReplyArea = (): boolean => replyAreaActive = !replyAreaActive
-  const handleReplySubmit = async (chatId: number): Promise<void> => {
-    // There's an issue here where the touser and fromuser are the same
+  
+  const handleReplySubmit = async (chatId: number, replyMessage: string): Promise<void> => {
     await sendUserMessage({
       chatId: chatId.toString(),
       fromUser: $userDetails.userId.toString(),
@@ -39,6 +42,7 @@
     })
     await getUserMessages($userDetails.userId.toString())
   }
+
   const handleOpenMessage = async (chatId: number, messageId: number, opened: boolean): Promise<void> => {
     currentMessage(chatId)
     handleMessageSwitchOrClose()
@@ -49,23 +53,12 @@
   }
   const handleMessageSwitchOrClose = (): void => {
     replyAreaActive = false
-    replyMessage = undefined
   }
   const handleAlertUser = async (chatId: number): Promise<void> => {
     if (window.confirm('Are you sure you wish to delete this chat')) {
       await deleteChat(chatId.toString())
       await getUserMessages($userDetails.userId.toString())
     }
-  }
-
-  const props = {
-    userId: $userDetails.userId,
-    openMessage: handleOpenMessage,
-    currentMessage: currentMessage,
-    handleMessageSwitchOrClose: handleMessageSwitchOrClose,
-    toggleReplyArea: toggleReplyArea,
-    handleAlertUser: handleAlertUser,
-    fromUser: fromUser
   }
 </script>
 
@@ -79,29 +72,25 @@
     </div>
     {#if $userMessages?.length > 0}
       {#each $userMessages as chat}
-        <MessagesInformation chatProps={chat} {...props} />
+        <MessagesInformation chats={chat} openMessage={handleOpenMessage} userId={$userDetails.userId} />
         {#if openMessage !== undefined && openMessage === chat[0].chatId}
           {#if openMessage === chat[0].chatId}
-            <!-- <div class="flex flex-row p-2 w-1/2 justify-between">
-              <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer font-bold text-left" on:click={() => {currentMessage(undefined); handleMessageSwitchOrClose()}}>Close</div>
-              <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer text-center font-bold" on:click={() => {toggleReplyArea(); fromUser = chat[0].toUser === $userDetails.userId ? chat[0].fromUser : chat[0].toUser}}>Reply</div>
-              <div class="w-1/3 hover:bg-[#e0e0e2] cursor-pointer font-bold text-right" on:click={() => handleAlertUser(chat[0].chatId)}>Delete</div>
-            </div> -->
-            <!-- TO DO: messages are now being ordered by user -->
-            <MessagesController chat={chat[0]} {...props} />
+            <MessagesController 
+              chat={chat[0]}
+              userId={$userDetails.userId}
+              currentMessage={currentMessage}
+              handleMessageSwitchOrClose={handleMessageSwitchOrClose}
+              toggleReplyArea={toggleReplyArea}
+              setFromUser={setFromUser}
+              handleAlertUser={handleAlertUser}
+            />
           {/if}
           <div class="w-full flex flex-col p-2 max-h-[400px] overflow-scroll">
             {#each chat as message}
-              <div class={clsx("flex flex-row justify-between w-1/2 py-1 h-10", message.fromUser === $userDetails.userId && 'bg-[#e0e0e2]')}>
-                <div>{message.message}</div>
-                <div>{message.username}</div>
-              </div>
+              <Message message={message} userId={$userDetails.userId} />
             {/each}
             {#if replyAreaActive}
-              <div class="flex justify-between flex-col w-1/2">
-                <textarea class="border-[#240465] border-2 resize-none p-2" placeholder="Enter your reply..." bind:value={replyMessage}></textarea>
-                <button class="border-[#240465] border-2 p-2 mt-1 font-bold" on:click={() => {handleReplySubmit(openMessage); handleMessageSwitchOrClose()}} disabled={replyMessage === undefined}>Send</button>
-              </div>
+              <MessageReplyArea handleReplySubmit={handleReplySubmit} handleMessageSwitchOrClose={handleMessageSwitchOrClose} openMessage={openMessage} />
             {/if}
           </div>
         {/if}
