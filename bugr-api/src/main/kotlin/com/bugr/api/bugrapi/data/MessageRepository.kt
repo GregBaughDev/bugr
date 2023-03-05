@@ -19,7 +19,7 @@ interface MessageRepository : JpaRepository<Message, Int> {
     @Transactional
     @Modifying
     @Query(
-        value = "INSERT INTO messages (chat_id, from_user, to_user, message, opened) VALUES (:chatId, :fromUser, :toUser, :message, true)",
+        value = "INSERT INTO messages (chat_id, from_user, to_user, message) VALUES (:chatId, :fromUser, :toUser, :message)",
         nativeQuery = true
     )
     fun saveUserMessage(chatId: Int, fromUser: Int, toUser: Int, message: String)

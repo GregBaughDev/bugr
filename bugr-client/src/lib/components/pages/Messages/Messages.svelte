@@ -8,7 +8,7 @@
   import MessagesController from "./MessagesController.svelte";
   import Message from "./Message.svelte";
   import MessageReplyArea from "./MessageReplyArea.svelte";
-  // TO DO: Refactor this whole component
+
   onMount(async () => {
     await getUserMessages($userDetails.userId.toString())
   })
@@ -72,6 +72,7 @@
     </div>
     {#if $userMessages?.length > 0}
       {#each $userMessages as chat}
+      <!--Need to update UI when props change-->
         <MessagesInformation chats={chat} openMessage={handleOpenMessage} userId={$userDetails.userId} />
         {#if openMessage !== undefined && openMessage === chat[0].chatId}
           {#if openMessage === chat[0].chatId}

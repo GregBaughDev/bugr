@@ -36,7 +36,7 @@ internal class MessageServiceTest {
     fun shouldSaveMessage() {
         val message = Message(1, 1, 1, 2, "Test message!", "12-10-2023", false, "testUser")
         messageService.postMessage(message)
-        verify(messageRepository, times(1)).saveUserMessage(message.chatId, message.fromUser, message.toUser, message.message)
+        verify(messageRepository, times(1)).saveUserMessage(message.chatId as Int, message.fromUser, message.toUser, message.message)
     }
 
     // TO DO: Add getMessages test -> Lots of issues with mocking ChatService

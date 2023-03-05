@@ -28,7 +28,7 @@ class MessageService(private val messageRepository: MessageRepository) {
     fun postMessage(message: Message) {
         // LOOK INTO THE BELOW - Exception not being thrown
         if (message.message.isEmpty()) throw InvalidInputException()
-
+        // TO DO: Look into issue where opened is always stored as true
         if (message.chatId?.toString().isNullOrBlank()) {
             val chatId: Optional<Int> = chatService.getChatForUserAndRecipient(message.toUser, message.fromUser)
             if (chatId.isPresent) {
@@ -38,7 +38,7 @@ class MessageService(private val messageRepository: MessageRepository) {
                 message.chatId = newChatId
             }
         }
-         return messageRepository.saveUserMessage(message.chatId as Int, message.fromUser, message.toUser, message.message)
+        return messageRepository.saveUserMessage(message.chatId as Int, message.fromUser, message.toUser, message.message)
     }
 
     fun updateMessageOpened(messageId: Int) {

@@ -22,7 +22,6 @@ class MessageController(private val messageService: MessageService) {
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     @ResponseStatus(HttpStatus.CREATED)
     fun saveNewMessage(@RequestBody message: Message) {
-        // Send a message here to the message service
         return messageService.postMessage(message)
     }
 
