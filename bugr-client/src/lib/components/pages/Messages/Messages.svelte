@@ -73,7 +73,7 @@
     {#if $userMessages?.length > 0}
       {#each $userMessages as chat}
       <!--Need to update UI when props change-->
-        <MessagesInformation chats={chat} openMessage={handleOpenMessage} userId={$userDetails.userId} />
+        <MessagesInformation chats={chat} openMessage={handleOpenMessage} />
         {#if openMessage !== undefined && openMessage === chat[0].chatId}
           {#if openMessage === chat[0].chatId}
             <MessagesController 
