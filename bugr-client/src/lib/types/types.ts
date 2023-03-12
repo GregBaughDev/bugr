@@ -33,7 +33,7 @@ export enum NavLinks {
   } as const
 
   type UserTypeProps = typeof UserType
-  type UserTypeValues = UserTypeProps[keyof UserTypeProps]
+  export type UserTypeValues = UserTypeProps[keyof UserTypeProps]
 
   export const States = {
     VIC: "VIC",
