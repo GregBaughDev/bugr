@@ -12,7 +12,7 @@ enum class State {
 
 @Entity
 @Table(name = "USERS")
-data class Users(
+data class User (
     @Id
     @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

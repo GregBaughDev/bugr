@@ -3,7 +3,7 @@ package com.bugr.api.bugrapi.business
 import com.bugr.api.bugrapi.data.UserRepository
 import com.bugr.api.bugrapi.models.LoggedInUser
 import com.bugr.api.bugrapi.models.UserSearch
-import com.bugr.api.bugrapi.models.Users
+import com.bugr.api.bugrapi.models.User
 import com.bugr.api.bugrapi.models.exceptions.InvalidInputException
 import com.bugr.api.bugrapi.models.exceptions.UserException
 import com.bugr.api.bugrapi.models.exceptions.UserExceptionResponse
@@ -35,7 +35,7 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.userLogin(username)
     }
 
-    fun newUser(newUser: Users): Users {
+    fun newUser(newUser: User): User {
         if (!emailRegex.matches(newUser.email)) throw InvalidInputException()
         if (doesUsernameExist(newUser.username)) throw UserException(UserExceptionResponse.USERNAME_EXISTS.responseToString())
         if (doesEmailExist(newUser.email)) throw UserException(UserExceptionResponse.EMAIL_EXISTS.responseToString())
